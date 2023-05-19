@@ -1,7 +1,5 @@
-import {Container, Grid, TextField, Typography} from '@mui/material';
+import {Container, Grid, Typography} from '@mui/material';
 import {Formik, Form} from 'formik';
-import moment from 'moment';
-import * as Yup from 'yup';
 
 import MeetingTextField from './formComponents/MeetingTextField';
 import MeetingSelect from './formComponents/MeetingSelect';
@@ -10,79 +8,14 @@ import MeetingCheckbox from './formComponents/MeetingCheckbox';
 import MeetingSubmitButton from './formComponents/MeetingSubmitButton';
 import MeetingTimePicker from './formComponents/MeetingTimePicker';
 
+import { INITIAL_FORM_STATE, FORM_VALIDATION } from '../utils/MeetingForm';
+
 import countries from '../data/countries.json';
 
 function ScheduleMeeting() {
 
-    const INITIAL_FORM_STATE = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        address: '',
-        city: '',
-        state: '',
-        country: '',
-        startDate: '',
-        startTime: '',
-        endTime: '',
-        description: '',
-        tos: false,
-    }
-
-    const FORM_VALIDATION = Yup.object().shape({
-        firstName: Yup
-            .string()
-            .required('Required'),
-        lastName: Yup
-            .string()
-            .required('Required'),
-        email: Yup
-            .string()
-            .email('Invalid email')
-            .required('Required'),
-        phone: Yup
-            .number()
-            .integer()
-            .typeError('Invalid phone number')
-            .required('Required'),
-        address: Yup
-            .string()
-            .required('Required'),
-        city: Yup
-            .string()
-            .required('Required'),
-        state: Yup
-            .string()
-            .required('Required'), 
-        country: Yup
-            .string()
-            .required('Required'), 
-        startDate: Yup
-            .date()
-            .min(new Date(), 'Schedule at a later date')
-            .required('Required'),
-        startTime: Yup
-            .string()
-            .required('Required'),
-        endTime: Yup
-            .string()
-            .required('Required')
-            .test("is-greater-time", "end time should be later than start", function(value) {
-                const { startTime } = this.parent;
-                return moment(value, "HH:mm").isSameOrAfter(moment(startTime, "HH:mm"));
-              }),
-        description: Yup
-            .string(),
-        tos: Yup
-            .boolean()
-            .oneOf([true], 'Must Agree to the terms of service')
-            .required('Required'),
-    });
-
-
   return (
-    <Container sx={{height:'800px',marginTop: '20px', paddingTop: '20px'}}>
+    <Container sx={{height:'800px',marginTop: '60px', paddingTop: '20px'}}>
         <Formik
         initialValues={INITIAL_FORM_STATE}
         validationSchema={FORM_VALIDATION}
