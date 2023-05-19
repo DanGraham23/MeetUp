@@ -3,11 +3,14 @@ import {
     FormControl,
     FormControlLabel,
     FormGroup,
-    FormLabel
-
+    FormLabel,
+    Popover,
+    Typography
 } from "@mui/material";
+import InfoIcon from '@mui/icons-material/Info';
 
 import { useField, useFormikContext } from "formik";
+import { useState } from "react";
 
 function MeetingCheckbox({
     name,
@@ -15,11 +18,12 @@ function MeetingCheckbox({
     legend,
     ...otherProps
 }) {
-
+    const [anchorEl, setAnchorEl] = useState(null);
     const [field, meta] = useField(name);
     const {setFieldValue} = useFormikContext();
+
     function handleChange(e){
-        const {checked} = e.target
+        const {checked} = e.target;
         setFieldValue(name, checked)
     }
 
@@ -29,6 +33,16 @@ function MeetingCheckbox({
         onChange: handleChange,
     };
 
+    const handlePopoverOpen = () => {
+        setAnchorEl(tos);
+      };
+    
+    const handlePopoverClose = () => {
+        setAnchorEl(null);
+    };
+
+    const isPopoverOpen = Boolean(anchorEl);
+
     const configFormControl = {}
 
     if (meta && meta.touched && meta.error){
@@ -36,15 +50,33 @@ function MeetingCheckbox({
     }
 
   return (
+    <>
     <FormControl {...configFormControl}>
-        <FormLabel component='legend'>{legend}</FormLabel>
+        <FormLabel component='legend' style={{display:'flex', gap:'5px'}}>
+            {legend}<InfoIcon onClick={handlePopoverOpen} style={{cursor:'pointer'}}/>
+        </FormLabel>
         <FormGroup>
             <FormControlLabel
-            control={<Checkbox {...configMeetingCheckbox}/>}
+            control={<Checkbox {...configMeetingCheckbox} id="tos"/>}
             label={label}
             />
         </FormGroup>
     </FormControl>
+    <Popover
+        open={isPopoverOpen}
+        anchorEl={anchorEl}
+        onClose={handlePopoverClose}
+        anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+        }}
+        >
+        <Typography style={{ padding: '10px' }}>
+            I will abide by the meeting time that I have chosen. Otherwise, I will let the meeting host know to cancel as early as possible.
+        </Typography>
+        </Popover>
+    </>
+    
   )
 }
 

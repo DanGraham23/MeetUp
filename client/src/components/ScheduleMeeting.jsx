@@ -82,7 +82,7 @@ function ScheduleMeeting() {
 
 
   return (
-    <Container sx={{backgroundColor:'#e8e8e8', height:'800px',marginTop: '20px', paddingTop: '20px'}}>
+    <Container sx={{height:'800px',marginTop: '20px', paddingTop: '20px'}}>
         <Formik
         initialValues={INITIAL_FORM_STATE}
         validationSchema={FORM_VALIDATION}
@@ -190,10 +190,8 @@ function ScheduleMeeting() {
                         legend='Terms of service'
                         />
                     </Grid>
-                    <Grid item xs={12}>
-                        <MeetingSubmitButton
-
-                        >
+                    <Grid item xs={4}>
+                        <MeetingSubmitButton>
                             Schedule Meeting
                         </MeetingSubmitButton>
                     </Grid>
