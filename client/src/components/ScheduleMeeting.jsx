@@ -1,12 +1,15 @@
 import {Container, Grid, TextField, Typography} from '@mui/material';
 import {Formik, Form} from 'formik';
+import moment from 'moment';
 import * as Yup from 'yup';
 
 import MeetingTextField from './formComponents/MeetingTextField';
 import MeetingSelect from './formComponents/MeetingSelect';
-import MeetingDateTimePicker from './formComponents/MeetingDateTimePicker';
+import MeetingDatePicker from './formComponents/MeetingDatePicker';
 import MeetingCheckbox from './formComponents/MeetingCheckbox';
 import MeetingSubmitButton from './formComponents/MeetingSubmitButton';
+import MeetingTimePicker from './formComponents/MeetingTimePicker';
+
 import countries from '../data/countries.json';
 
 function ScheduleMeeting() {
@@ -21,7 +24,8 @@ function ScheduleMeeting() {
         state: '',
         country: '',
         startDate: '',
-        endDate: '',
+        startTime: '',
+        endTime: '',
         description: '',
         tos: false,
     }
@@ -56,10 +60,18 @@ function ScheduleMeeting() {
             .required('Required'), 
         startDate: Yup
             .date()
+            .min(new Date(), 'Schedule at a later date')
             .required('Required'),
-        endDate: Yup
-            .date()
+        startTime: Yup
+            .string()
             .required('Required'),
+        endTime: Yup
+            .string()
+            .required('Required')
+            .test("is-greater-time", "end time should be later than start", function(value) {
+                const { startTime } = this.parent;
+                return moment(value, "HH:mm").isSameOrAfter(moment(startTime, "HH:mm"));
+              }),
         description: Yup
             .string(),
         tos: Yup
@@ -145,15 +157,21 @@ function ScheduleMeeting() {
                             Meeting Details
                         </Typography>
                     </Grid>
-                    <Grid item xs={6}>
-                        <MeetingDateTimePicker 
+                    <Grid item xs={4}>
+                        <MeetingDatePicker 
                         name='startDate'    
+                        label='Start date'
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <MeetingTimePicker 
+                        name='startTime'    
                         label='Start time'
                         />
                     </Grid>
-                    <Grid item xs={6}>
-                        <MeetingDateTimePicker 
-                        name='endDate' 
+                    <Grid item xs={4}>
+                        <MeetingTimePicker 
+                        name='endTime'    
                         label='End time'
                         />
                     </Grid>
