@@ -12,14 +12,19 @@ import { INITIAL_FORM_STATE, FORM_VALIDATION } from '../utils/MeetingForm';
 
 import countries from '../data/countries.json';
 
-function ScheduleMeeting() {
+function ScheduleMeeting({handleClose}) {
+
+    function handleSubmit(values){
+        handleClose();
+        console.log(values);
+    }
 
   return (
     <Container sx={{height:'800px',marginTop: '60px', paddingTop: '20px'}}>
         <Formik
         initialValues={INITIAL_FORM_STATE}
         validationSchema={FORM_VALIDATION}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
         >
             <Form>
                 <Grid container spacing={2}>
