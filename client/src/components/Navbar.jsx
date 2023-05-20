@@ -1,16 +1,20 @@
-import {AppBar, Typography} from '@mui/material';
+import {AppBar, Typography, Toolbar, Link} from '@mui/material';
 
 function Navbar() {
   return (
     <AppBar
-    position='absolute'
+    position='fixed'
     sx={{height:'64px', display:'flex', alignItems:'center', justifyContent:'center'}}
     >
-        <Typography variant='h5' component='h1'>
+      <Toolbar>
+        <Link href='/' color='inherit' underline='none'>
+          <Typography variant='h5' component='h1'>
             MeetUp
-        </Typography>
+          </Typography>
+        </Link>
+      </Toolbar>
     </AppBar>
   )
 }
 
-export default Navbar
+export default Navbar;

@@ -1,4 +1,4 @@
-import {Typography, Button, Container } from '@mui/material';
+import {Typography, Button, Container} from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import ScheduleMeetingModal from '../components/ScheduleMeetingModal';
@@ -10,7 +10,7 @@ function Profile() {
     const handleClose = () => setOpen(false);
 
     return (
-    <Container style={{marginTop:'60px', paddingTop:'20px'}}>
+    <Container>
         <Typography>
             Welcome to {username}'s profile
         </Typography>
