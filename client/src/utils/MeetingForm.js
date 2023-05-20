@@ -31,6 +31,8 @@ export const FORM_VALIDATION = Yup.object().shape({
     phone: Yup
         .number()
         .integer()
+        .min(1000000000, 'Phone number must be 10 digits')
+        .max(9999999999, 'Phone number must be 10 digits')
         .typeError('Invalid phone number')
         .required('Required'),
     address: Yup
