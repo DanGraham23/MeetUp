@@ -1,4 +1,4 @@
-import {Container, Grid, Typography} from '@mui/material';
+import {Box, Grid, Typography} from '@mui/material';
 import {Formik, Form} from 'formik';
 
 import MeetingTextField from './formComponents/MeetingTextField';
@@ -20,7 +20,7 @@ function ScheduleMeeting({handleClose}) {
     }
 
   return (
-    <Container sx={{height:'800px',marginTop: '60px', paddingTop: '20px'}}>
+    <Box sx={{height:'750px', width:'80%', marginLeft:'auto', marginRight:'auto'}}>
         <Formik
         initialValues={INITIAL_FORM_STATE}
         validationSchema={FORM_VALIDATION}
@@ -28,7 +28,6 @@ function ScheduleMeeting({handleClose}) {
         >
             <Form>
                 <Grid container spacing={2}>
-
                     <Grid item xs={12}>
                         <Typography >
                             Personal Details
@@ -136,7 +135,7 @@ function ScheduleMeeting({handleClose}) {
                 </Grid>
             </Form>
         </Formik>
-    </Container>
+    </Box>
   )
 }
 

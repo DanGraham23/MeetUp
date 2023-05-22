@@ -1,37 +1,36 @@
-import { Box, Typography, Modal } from '@mui/material';
+import { Box, Typography, Modal, styled } from '@mui/material';
 import ScheduleMeeting from '../components/ScheduleMeeting';
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '80%',
-    height: '80%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+const StyledBox = styled(Box)(({})=> ({
+  position: 'absolute',
+    top: '10%',
+    left: '20%',
+    width: '70%',
+    height: '85%',
+    backgroundColor: 'white',
+    border: '2px solid black',
     boxShadow: 24,
-    p: 4,
     overflowY: 'scroll',
-  };
+    paddingTop:25,
+}));
 
 function ScheduleMeetingModal({open, handleClose}) {
   return (
     <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        // aria-labelledby="modal-modal-title"
+        // aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+        <StyledBox>
+          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
             Schedule a meeting!
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Fill out this form to let me know about this meeting
-          </Typography>
+          </Typography> */}
           <ScheduleMeeting handleClose={handleClose}/>
-        </Box>
+        </StyledBox>
       </Modal>
   )
 }

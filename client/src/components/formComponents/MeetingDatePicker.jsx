@@ -13,7 +13,7 @@ function MeetingDatePicker({name, ...otherProps}) {
         fullWidth: true,
         InputLabelProps: {
             shrink:true,
-        }
+        },
     }
 
     if (meta && meta.touched && meta.error){

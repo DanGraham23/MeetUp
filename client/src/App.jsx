@@ -1,24 +1,30 @@
-import {Box, CssBaseline} from '@mui/material';
-import Navbar from './components/Navbar';
+import {Box, CssBaseline, ThemeProvider, createTheme} from '@mui/material';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+
 import Home from './pages/Home';
-import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
+
+const theme = createTheme({
+
+})
 
 function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
-        <Box style={{marginTop:'60px', paddingTop:'20px'}}>
-          <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/profile/:username' element={<Profile />}/>
-            <Route path='*' element={<Home />}/>  
-          </Routes>
-        </Box>
-      </BrowserRouter>
-      <CssBaseline />
+        <ThemeProvider theme={theme}>
+        <BrowserRouter>
+            <Box>
+              <Routes>
+                <Route path='/' element={<Home />}/>
+                <Route path='/dashboard/:username' element={<Dashboard />}/>
+                <Route path='*' element={<Home />}/>  
+              </Routes>
+            </Box>
+          </BrowserRouter>
+          <CssBaseline />
+        </ThemeProvider>
+
     </>
   )
 }
