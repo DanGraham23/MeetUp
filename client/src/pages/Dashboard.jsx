@@ -1,27 +1,22 @@
-import {Typography, Button, Stack, Box} from '@mui/material';
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
-import ScheduleMeetingModal from '../components/ScheduleMeetingModal';
+import {Stack, Box} from '@mui/material';
 import Sidebar from '../components/sidebar/Sidebar';
 import Topbar from '../components/Topbar';
+import Calendar from '../components/Calendar';
+
 
 function Profile() {
-    const {username} = useParams();
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
+    
     return (
-    <Stack direction="row" spacing={2}>
-        <Sidebar />
-        <Box sx={{flex:9}}>
-            <Topbar />
-            <Typography>
-                Welcome to {username}'s profile
-            </Typography>
-            <Button onClick={handleOpen} variant='contained'>Schedule meeting</Button>
-            <ScheduleMeetingModal open={open} handleClose={handleClose}/>
-        </Box>  
+    <Stack direction='column' spacing={2}>
+        <Topbar />
+        <Stack direction='row'>
+            <Sidebar />
+            <Box sx={{flex:9}}>
+                <Box sx={{marginRight:'20px', marginTop:'20px'}}>
+                    <Calendar />
+                </Box>
+            </Box>  
+        </Stack>
     </Stack>
   )
 }

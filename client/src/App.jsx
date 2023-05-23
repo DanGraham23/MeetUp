@@ -5,7 +5,9 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 
 const theme = createTheme({
-
+  palette: {
+    mode:'dark'
+  }
 })
 
 function App() {

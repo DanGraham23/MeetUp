@@ -1,13 +1,13 @@
 import { Box, Typography, Modal, styled } from '@mui/material';
 import ScheduleMeeting from '../components/ScheduleMeeting';
 
-const StyledBox = styled(Box)(({})=> ({
+const StyledBox = styled(Box)(({theme})=> ({
   position: 'absolute',
     top: '10%',
     left: '20%',
     width: '70%',
-    height: '85%',
-    backgroundColor: 'white',
+    height: '80%',
+    backgroundColor:theme.palette.background.default,  
     border: '2px solid black',
     boxShadow: 24,
     overflowY: 'scroll',

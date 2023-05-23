@@ -8,6 +8,9 @@ import {
     Divider,
 } from '@mui/material';
 
+import { useState } from 'react';
+import ScheduleMeetingModal from '../ScheduleMeetingModal';
+
 import Search from './Search';
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -15,22 +18,35 @@ import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
+
 import DarkModeSwitch from './DarkModeSwitch';
 
 const StyledBox = styled(Box)(({theme}) => ({
-    backgroundColor: '#fffff7',
     flex: 2,
     padding: 20,
     height: '100vh',
 }));
 
 function Sidebar() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <StyledBox>
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem disablePadding sx={{padding:'8px 16px 8px 16px'}}>
             <Search />
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleOpen}>
+              <ListItemIcon>
+                <EditCalendarOutlinedIcon/>
+              </ListItemIcon>
+              <ListItemText primary="Schedule New Meeting" />
+            </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton>
@@ -83,6 +99,7 @@ function Sidebar() {
           </ListItem>
         </List>
       </nav>
+      <ScheduleMeetingModal open={open} handleClose={handleClose}/>
     </StyledBox>
   )
 }

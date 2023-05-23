@@ -10,10 +10,9 @@ import SearchIcon from '@mui/icons-material/Search';
 const StyledSearch = styled(Box)(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#e9e9e9',
     marginBottom: 10,
+    border: '1px solid white',
     '&:hover': {
-        backgroundColor: '#dddddd',
     },
   }));
 

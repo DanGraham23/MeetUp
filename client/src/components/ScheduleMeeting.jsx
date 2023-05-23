@@ -20,7 +20,7 @@ function ScheduleMeeting({handleClose}) {
     }
 
   return (
-    <Box sx={{height:'750px', width:'80%', marginLeft:'auto', marginRight:'auto'}}>
+    <Box sx={{height:'800px', width:'80%', marginLeft:'auto', marginRight:'auto'}}>
         <Formik
         initialValues={INITIAL_FORM_STATE}
         validationSchema={FORM_VALIDATION}
