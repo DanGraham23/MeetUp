@@ -5,18 +5,15 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
-
-const theme = createTheme({
-  palette: {
-    mode:'dark'
-  }
-})
+import { useThemeContext } from './theme/ThemeContext';
 
 function App() {
 
+  const {theme} = useThemeContext();
+
   return (
     <>
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <BrowserRouter>
             <Box>
               <Routes>
@@ -29,8 +26,7 @@ function App() {
             </Box>
           </BrowserRouter>
           <CssBaseline />
-        </ThemeProvider>
-
+      </ThemeProvider>
     </>
   )
 }
