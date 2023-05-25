@@ -12,7 +12,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { useField, useFormikContext } from "formik";
 import { useState } from "react";
 
-function MeetingCheckbox({
+function FormTosCheckbox({
     name,
     label,
     legend,
@@ -27,7 +27,7 @@ function MeetingCheckbox({
         setFieldValue(name, checked)
     }
 
-    const configMeetingCheckbox = {
+    const configFormTosCheckbox = {
         ...otherProps,
         ...field,
         onChange: handleChange,
@@ -57,7 +57,7 @@ function MeetingCheckbox({
         </FormLabel>
         <FormGroup>
             <FormControlLabel
-            control={<Checkbox {...configMeetingCheckbox} id="tos"/>}
+            control={<Checkbox {...configFormTosCheckbox} id="tos"/>}
             label={label}
             />
         </FormGroup>
@@ -80,4 +80,4 @@ function MeetingCheckbox({
   )
 }
 
-export default MeetingCheckbox;
+export default FormTosCheckbox;

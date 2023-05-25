@@ -3,7 +3,26 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
+import {styled} from '@mui/material';
+
 function Calendar() {
+
+  const StyledFullCalendarWrapper = styled('div')(({theme}) => ({
+    '.fc-toolbar button' : {
+      color:theme.palette.text.primary,
+      backgroundColor:theme.palette.background.default,
+      '&:hover': {
+        backgroundColor:theme.palette.action.hover,
+      },
+      '&:focus': {
+        backgroundColor:theme.palette.action.selected,
+      },
+      '&:active': {
+        backgroundColor:theme.palette.action.hover,
+        color:'red'
+      },
+    }
+  }));
 
     const configFullCalendar = {
         plugins: [dayGridPlugin, timeGridPlugin,interactionPlugin],
@@ -25,16 +44,18 @@ function Calendar() {
             { title: 'Class 6', date: '2023-05-24' },
             { title: 'Class 7', date: '2023-05-25' }
         ],
-        eventBackgroundColor:'#121212',
-        eventBorderColor:'#4e4e4e',
         dayMaxEventRows: true,
     }
 
   return (
-    <FullCalendar 
-    themeSystem='slate'
-    {...configFullCalendar}    
-    />
+    <StyledFullCalendarWrapper>
+      
+      <FullCalendar 
+      themeSystem='slate'
+      {...configFullCalendar}    
+      />
+    </StyledFullCalendarWrapper>
+    
   )
 }
 

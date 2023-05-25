@@ -1,11 +1,11 @@
 import { TextField } from "@mui/material";
 import { useField} from "formik";
 
-function MeetingTimePicker({name, ...otherProps}) {
+function FormTimePicker({name, ...otherProps}) {
 
     const [field, meta] = useField(name);
 
-    const configMeetingTimePicker = {
+    const configFormTimePicker = {
         ...otherProps,
         ...field,
         variant:'outlined',
@@ -17,15 +17,15 @@ function MeetingTimePicker({name, ...otherProps}) {
     }
 
     if (meta && meta.touched && meta.error){
-        configMeetingTimePicker.error = true;
-        configMeetingTimePicker.helperText = meta.error;
+      configFormTimePicker.error = true;
+      configFormTimePicker.helperText = meta.error;
     }
 
   return (
     <TextField 
-    {...configMeetingTimePicker}
+    {...configFormTimePicker}
     />
   )
 }
 
-export default MeetingTimePicker;
+export default FormTimePicker;

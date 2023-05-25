@@ -2,7 +2,7 @@ import { TextField, MenuItem } from "@mui/material"
 import { useField, useFormikContext } from "formik"
 
 
-function MeetingSelect({name, options, ...otherProps}) {
+function FormSelect({name, options, ...otherProps}) {
 
     const {setFieldValue} = useFormikContext();
     const [field, meta] = useField(name);
@@ -12,7 +12,7 @@ function MeetingSelect({name, options, ...otherProps}) {
         setFieldValue(name, value);
     }
 
-    const configMeetingSelect = {
+    const configFormSelect = {
         ...field,
         ...otherProps,
         select: true,
@@ -22,13 +22,13 @@ function MeetingSelect({name, options, ...otherProps}) {
     }
 
     if (meta && meta.touched && meta.error){
-        configMeetingSelect.error = true;
-        configMeetingSelect.helperText = meta.error;
+        configFormSelect.error = true;
+        configFormSelect.helperText = meta.error;
     }
 
   return (
     <TextField 
-    {...configMeetingSelect}
+    {...configFormSelect}
     >
     {Object.keys(options).map((option, idx) => {
         return (
@@ -41,4 +41,4 @@ function MeetingSelect({name, options, ...otherProps}) {
   )
 }
 
-export default MeetingSelect
+export default FormSelect

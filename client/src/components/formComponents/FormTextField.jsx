@@ -1,11 +1,11 @@
 import { TextField } from "@mui/material"
 import {useField} from 'formik';
 
-function MeetingTextField({name, ...otherProps}) {
+function FormTextField({name, ...otherProps}) {
 
   const [field, meta] = useField(name);
 
-  const configMeetingTextField = {
+  const configFormTextField = {
     ...field,
     ...otherProps,
     fullWidth: true,
@@ -13,13 +13,13 @@ function MeetingTextField({name, ...otherProps}) {
   }
 
   if (meta && meta.touched && meta.error){
-    configMeetingTextField.error = true;
-    configMeetingTextField.helperText = meta.error;
+    configFormTextField.error = true;
+    configFormTextField.helperText = meta.error;
   }
 
   return (
-    <TextField {...configMeetingTextField}/>
+    <TextField {...configFormTextField}/>
   )
 }
 
-export default MeetingTextField;
+export default FormTextField;

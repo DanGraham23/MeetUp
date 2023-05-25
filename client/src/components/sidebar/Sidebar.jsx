@@ -14,7 +14,7 @@ import ScheduleMeetingModal from '../ScheduleMeetingModal';
 import Search from './Search';
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
+import PeopleIcon from '@mui/icons-material/People';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -51,9 +51,9 @@ function Sidebar() {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <ViewQuiltIcon/>
+                <PeopleIcon/>
               </ListItemIcon>
-              <ListItemText primary="Overview" />
+              <ListItemText primary="Friends" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>

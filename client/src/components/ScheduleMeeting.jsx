@@ -1,16 +1,13 @@
 import {Box, Grid, Typography} from '@mui/material';
 import {Formik, Form} from 'formik';
 
-import MeetingTextField from './formComponents/MeetingTextField';
-import MeetingSelect from './formComponents/MeetingSelect';
-import MeetingDatePicker from './formComponents/MeetingDatePicker';
-import MeetingCheckbox from './formComponents/MeetingCheckbox';
-import MeetingSubmitButton from './formComponents/MeetingSubmitButton';
-import MeetingTimePicker from './formComponents/MeetingTimePicker';
+import FormTextField from './formComponents/FormTextField';
+import FormDatePicker from './formComponents/FormDatePicker';
+import FormTosCheckbox from './formComponents/FormTosCheckbox';
+import FormSubmitButton from './formComponents/FormSubmitButton';
+import FormTimePicker from './formComponents/FormTimePicker';
 
 import { INITIAL_FORM_STATE, FORM_VALIDATION } from '../utils/MeetingForm';
-
-import countries from '../data/countries.json';
 
 function ScheduleMeeting({handleClose}) {
 
@@ -20,7 +17,7 @@ function ScheduleMeeting({handleClose}) {
     }
 
   return (
-    <Box sx={{height:'800px', width:'80%', marginLeft:'auto', marginRight:'auto'}}>
+    <Box sx={{height:'500px', width:'80%', marginLeft:'auto', marginRight:'auto'}}>
         <Formik
         initialValues={INITIAL_FORM_STATE}
         validationSchema={FORM_VALIDATION}
@@ -34,58 +31,27 @@ function ScheduleMeeting({handleClose}) {
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <MeetingTextField 
+                        <FormTextField 
                         name='firstName'
                         label='First Name'
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <MeetingTextField 
+                        <FormTextField 
                         name='lastName'
                         label='Last Name'
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <MeetingTextField 
+                        <FormTextField 
                         name='email'
                         label='Email'
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <MeetingTextField 
+                        <FormTextField 
                         name='phone'
                         label='Phone Number'
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <Typography>
-                            Address Information
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <MeetingTextField 
-                        name='address'
-                        label='Address'
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <MeetingSelect 
-                        name='country'
-                        label='Country'
-                        options={countries}
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <MeetingTextField 
-                        name='state'
-                        label='State'
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <MeetingTextField 
-                        name='city'
-                        label='City'
                         />
                     </Grid>
 
@@ -95,25 +61,25 @@ function ScheduleMeeting({handleClose}) {
                         </Typography>
                     </Grid>
                     <Grid item xs={4}>
-                        <MeetingDatePicker 
+                        <FormDatePicker 
                         name='startDate'    
                         label='Start date'
                         />
                     </Grid>
                     <Grid item xs={4}>
-                        <MeetingTimePicker 
+                        <FormTimePicker 
                         name='startTime'    
                         label='Start time'
                         />
                     </Grid>
                     <Grid item xs={4}>
-                        <MeetingTimePicker 
+                        <FormTimePicker 
                         name='endTime'    
                         label='End time'
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <MeetingTextField 
+                        <FormTextField 
                         name='description'
                         label='Anything you would like me to know about our meeting?'
                         multiline={true}
@@ -121,16 +87,16 @@ function ScheduleMeeting({handleClose}) {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <MeetingCheckbox 
+                        <FormTosCheckbox 
                         name='tos'
                         label='Agree'
                         legend='Terms of service'
                         />
                     </Grid>
                     <Grid item xs={4}>
-                        <MeetingSubmitButton>
+                        <FormSubmitButton>
                             Schedule Meeting
-                        </MeetingSubmitButton>
+                        </FormSubmitButton>
                     </Grid>
                 </Grid>
             </Form>

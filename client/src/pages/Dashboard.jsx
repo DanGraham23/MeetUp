@@ -5,9 +5,9 @@ import Calendar from '../components/Calendar';
 
 
 function Profile() {
-    
+
     return (
-    <Stack direction='column' spacing={2}>
+    <Stack direction='column' spacing={1}>
         <Topbar />
         <Stack direction='row'>
             <Sidebar />

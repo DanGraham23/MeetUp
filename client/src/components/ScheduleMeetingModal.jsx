@@ -3,15 +3,16 @@ import ScheduleMeeting from '../components/ScheduleMeeting';
 
 const StyledBox = styled(Box)(({theme})=> ({
   position: 'absolute',
-    top: '10%',
-    left: '20%',
-    width: '70%',
-    height: '80%',
-    backgroundColor:theme.palette.background.default,  
-    border: '2px solid black',
-    boxShadow: 24,
-    overflowY: 'scroll',
-    paddingTop:25,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '60%',
+  height: '70%',
+  backgroundColor:theme.palette.background.default,  
+  border: '2px solid black',
+  boxShadow: 24,
+  overflowY: 'scroll',
+  paddingTop:25,
 }));
 
 function ScheduleMeetingModal({open, handleClose}) {

@@ -1,18 +1,16 @@
-import moment from 'moment';
 import * as Yup from 'yup';
 
 export const INITIAL_FORM_STATE = {
     firstName: '',
     lastName: '',
     email: '',
+    password: '',
     phone: '',
-    startDate: '',
-    startTime: '',
-    endTime: '',
-    description: '',
-    tos: false,
-}
-
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+}; 
 export const FORM_VALIDATION = Yup.object().shape({
     firstName: Yup
         .string()
@@ -24,6 +22,13 @@ export const FORM_VALIDATION = Yup.object().shape({
         .string()
         .email('Invalid email')
         .required('Required'),
+    password: Yup
+        .string()
+        .required('Please Enter your password')
+        .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        ),
     phone: Yup
         .number()
         .integer()
@@ -31,24 +36,17 @@ export const FORM_VALIDATION = Yup.object().shape({
         .max(9999999999, 'Phone number must be 10 digits')
         .typeError('Invalid phone number')
         .required('Required'),
-    startDate: Yup
-        .date()
-        .min(new Date(), 'Schedule at a later date')
-        .required('Required'),
-    startTime: Yup
+    address: Yup
         .string()
         .required('Required'),
-    endTime: Yup
+    city: Yup
         .string()
-        .required('Required')
-        .test("is-greater-time", "end time should be later than start", function(value) {
-            const { startTime } = this.parent;
-            return moment(value, "HH:mm").isSameOrAfter(moment(startTime, "HH:mm"));
-          }),
-    description: Yup
-        .string(),
-    tos: Yup
-        .boolean()
-        .oneOf([true], 'Must Agree to the terms of service')
         .required('Required'),
+    state: Yup
+        .string()
+        .required('Required'), 
+    country: Yup
+        .string()
+        .required('Required'), 
 });
+

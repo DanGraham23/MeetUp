@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import {useFormikContext} from 'formik';
 
-function MeetingSubmitButton({children, ...otherProps}) {
+function FormSubmitButton({children, ...otherProps}) {
 
     const {submitForm} = useFormikContext();
 
@@ -9,7 +9,7 @@ function MeetingSubmitButton({children, ...otherProps}) {
         submitForm();
     }
 
-    const configMeetingSubmitButton = {
+    const configFormSubmitButton = {
         ...otherProps,
         variant:'contained',
         fullWidth:true,
@@ -18,11 +18,11 @@ function MeetingSubmitButton({children, ...otherProps}) {
 
   return (
     <Button 
-    {...configMeetingSubmitButton}
+    {...configFormSubmitButton}
     >
         {children}
     </Button>
   )
 }
 
-export default MeetingSubmitButton;
+export default FormSubmitButton;

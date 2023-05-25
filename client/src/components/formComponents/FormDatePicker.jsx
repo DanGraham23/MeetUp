@@ -1,11 +1,11 @@
 import { TextField } from "@mui/material";
 import { useField } from "formik";
 
-function MeetingDatePicker({name, ...otherProps}) {
+function FormDatePicker({name, ...otherProps}) {
 
     const [field, meta] = useField(name);
 
-    const configMeetingDatePicker = {
+    const configFormDatePicker = {
         ...field,
         ...otherProps,
         type: 'date',
@@ -17,15 +17,15 @@ function MeetingDatePicker({name, ...otherProps}) {
     }
 
     if (meta && meta.touched && meta.error){
-      configMeetingDatePicker.error = true;
-      configMeetingDatePicker.helperText = meta.error;
+      configFormDatePicker.error = true;
+      configFormDatePicker.helperText = meta.error;
     }
 
   return (
-    <TextField {...configMeetingDatePicker}>
+    <TextField {...configFormDatePicker}>
 
     </TextField>
   )
 }
 
-export default MeetingDatePicker;
+export default FormDatePicker;
