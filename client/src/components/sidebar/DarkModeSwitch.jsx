@@ -6,10 +6,17 @@ function DarkModeSwitch() {
 
   const {mode, toggleColorMode} = useThemeContext();
 
+  function handleChange(){
+    localStorage.setItem("colorModePreference", mode === "light" ? "dark" : "light");
+    toggleColorMode();
+    
+  }
+
   return (
     <Switch
     edge="end"
-    onChange={toggleColorMode}
+    onChange={handleChange}
+    checked={mode === "dark"}
     inputProps={{
     'aria-labelledby': 'switch-list-label-dark-mode',
     }}
