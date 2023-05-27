@@ -1,4 +1,4 @@
-import {Box, CssBaseline, ThemeProvider, createTheme} from '@mui/material';
+import {Box, CssBaseline, ThemeProvider} from '@mui/material';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import Home from './pages/Home';

@@ -1,53 +1,35 @@
-import {Formik, Form} from 'formik';
-import {INITIAL_FORM_STATE, FORM_VALIDATION} from '../utils/RegisterForm';
-import {Box, Typography, Grid} from '@mui/material';
+import { Avatar, Box, Typography,Grid, IconButton } from "@mui/material";
+import { Formik, Form } from "formik";
 
-import FormTextField from '../components/formComponents/FormTextField';
-import FormSelect from '../components/formComponents/FormSelect';
-import FormSubmitButton from '../components/formComponents/FormSubmitButton';
+import FormTextField from "./formComponents/FormTextField";
+import FormSelect from "./formComponents/FormTextField";
+import FormSubmitButton from "./formComponents/FormSubmitButton";
+
+import { INITIAL_FORM_STATE, FORM_VALIDATION } from "../utils/SettingsForm";
 
 import countries from '../data/countries.json';
 
-function Register() {
+function Settings() {
 
-  function handleSubmit(values){
-    console.log(values);
-}
+    function handleSubmit(values){
+        console.log(values);
+    }
 
   return (
-    <Box sx={{height:'500px', width:'40%', marginLeft:'auto', marginRight:'auto'}}>
+    <Box>
         <Formik
-        initialValues={INITIAL_FORM_STATE}
         validationSchema={FORM_VALIDATION}
+        initialValues={INITIAL_FORM_STATE}
         onSubmit={handleSubmit}
         >
             <Form>
+                <IconButton size="medium" aria-label="upload profile avatar">
+                    <Avatar 
+                    alt='John Doe' 
+                    src="https://material-ui.com/static/images/avatar/1.jpg" 
+                    sx={{ width: 150, height: 150}}/>
+                </IconButton>
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Typography align='center' variant='h4' marginTop='50px' marginBottom='50px'>
-                            Welcome To MeetUp
-                        </Typography>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <Typography>
-                            Login Credentials
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <FormTextField 
-                        name='email'
-                        label='Email'
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <FormTextField 
-                        name='password'
-                        label='Password'
-                        type='password'
-                        />
-                    </Grid>
-                    
                     <Grid item xs={12}>
                         <Typography >
                             Personal Details
@@ -71,7 +53,6 @@ function Register() {
                         label='Phone Number'
                         />
                     </Grid>
-
                     <Grid item xs={12}>
                         <Typography>
                             Address Information
@@ -102,9 +83,28 @@ function Register() {
                         label='City'
                         />
                     </Grid>
+                    <Grid item xs={12}>
+                        <Typography>
+                            Login Credentials
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <FormTextField 
+                        name='email'
+                        label='Email'
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <FormTextField 
+                        name='password'
+                        label='Password'
+                        type='password'
+                        />
+                    </Grid>
+
                     <Grid item xs={4} alignSelf='center'>
                         <FormSubmitButton>
-                            Register
+                            Apply Changes
                         </FormSubmitButton>
                     </Grid>
                 </Grid>
@@ -114,4 +114,4 @@ function Register() {
   )
 }
 
-export default Register;
+export default Settings;

@@ -41,4 +41,4 @@ function FormSelect({name, options, ...otherProps}) {
   )
 }
 
-export default FormSelect
+export default FormSelect;

@@ -28,7 +28,7 @@ const StyledBox = styled(Box)(({theme}) => ({
     height: '100vh',
 }));
 
-function Sidebar() {
+function Sidebar({setDashboardView}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -49,7 +49,7 @@ function Sidebar() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => setDashboardView("friends")}>
               <ListItemIcon>
                 <PeopleIcon/>
               </ListItemIcon>
@@ -57,7 +57,7 @@ function Sidebar() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => setDashboardView("calendar")}>
               <ListItemIcon>
                 <CalendarMonthIcon/>
               </ListItemIcon>
@@ -82,7 +82,7 @@ function Sidebar() {
       <nav aria-label="tertiary mailbox folders">
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton  onClick={() => setDashboardView("settings")}>
               <ListItemIcon>
                 <SettingsIcon/>
               </ListItemIcon>
@@ -90,7 +90,7 @@ function Sidebar() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => setDashboardView("help")}>
               <ListItemIcon>
                 <HelpCenterIcon/>
               </ListItemIcon>
