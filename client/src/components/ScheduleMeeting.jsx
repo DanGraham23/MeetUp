@@ -25,36 +25,12 @@ function ScheduleMeeting({handleClose}) {
         >
             <Form>
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Typography >
-                            Personal Details
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={6}>
+                <Grid item xs={12}>
                         <FormTextField 
-                        name='firstName'
-                        label='First Name'
+                        name='title'
+                        label='Give our meeting a title...'
                         />
                     </Grid>
-                    <Grid item xs={6}>
-                        <FormTextField 
-                        name='lastName'
-                        label='Last Name'
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <FormTextField 
-                        name='email'
-                        label='Email'
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <FormTextField 
-                        name='phone'
-                        label='Phone Number'
-                        />
-                    </Grid>
-
                     <Grid item xs={12}>
                         <Typography>
                             Meeting Details
