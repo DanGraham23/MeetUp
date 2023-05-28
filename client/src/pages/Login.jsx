@@ -6,11 +6,30 @@ import FormSubmitButton from '../components/formComponents/FormSubmitButton';
 
 import { INITIAL_FORM_STATE, FORM_VALIDATION } from '../utils/LoginForm';
 
-function Login() {
+import axios from '../utils/axios';
+import {loginRoute} from '../utils/routes';
 
-  function handleSubmit(values){
-    console.log(values);
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+
+function Login() {
+    const {auth, setAuth} = useContext(AuthContext);
+
+  async function handleSubmit(values){
+    await axios.post(loginRoute, {
+        email:values.email,
+        password:values.password
+    }).then((res) => {
+        setAuth({
+            id: res.data,
+            isLoggedIn: true,
+        });
+        localStorage.setItem("meetup-user", JSON.stringify({id: res.data}));
+    }).catch((err) => {
+        console.log(err);
+    });
   }
+
   return (
     <Box sx={{height:'500px', width:'40%', marginLeft:'auto', marginRight:'auto'}}>
         <Formik

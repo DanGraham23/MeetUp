@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { useThemeContext } from './theme/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
 
   return (
     <>
+    <AuthProvider>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
             <Box>
@@ -27,6 +29,7 @@ function App() {
           </BrowserRouter>
           <CssBaseline />
       </ThemeProvider>
+    </AuthProvider>
     </>
   )
 }

@@ -8,11 +8,38 @@ import FormSubmitButton from '../components/formComponents/FormSubmitButton';
 
 import countries from '../data/countries.json';
 
+import axios from '../utils/axios';
+import {registerRoute} from '../utils/routes';
+
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+
 function Register() {
 
-  function handleSubmit(values){
-    console.log(values);
-}
+    const {auth, setAuth} = useContext(AuthContext);
+
+    async function handleSubmit(values){
+        console.log(values);
+        await axios.post(registerRoute, {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            email: values.email,
+            password: values.password,
+            phoneNumber: values.phone,
+            address: values.address,
+            city: values.city,
+            state: values.state,
+            country: values.country,
+        }).then((res) => {
+            setAuth({
+                id: res.data,
+                isLoggedIn: true,
+            });
+            localStorage.setItem("meetup-user", JSON.stringify({id: res.data}));
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 
   return (
     <Box sx={{height:'500px', width:'40%', marginLeft:'auto', marginRight:'auto'}}>
