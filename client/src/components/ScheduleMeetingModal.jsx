@@ -8,7 +8,7 @@ const StyledBox = styled(Box)(({theme})=> ({
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '60%',
-  height: '65%',
+  height: '600px',
   display:'flex',
   flexDirection:'column',
   alignItems:'center',

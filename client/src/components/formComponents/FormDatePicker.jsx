@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { TextField, InputAdornment } from "@mui/material";
 import { useField } from "formik";
 
 function FormDatePicker({name, ...otherProps}) {
@@ -14,6 +14,7 @@ function FormDatePicker({name, ...otherProps}) {
         InputLabelProps: {
             shrink:true,
         },
+        
     }
 
     if (meta && meta.touched && meta.error){
@@ -22,8 +23,9 @@ function FormDatePicker({name, ...otherProps}) {
     }
 
   return (
-    <TextField {...configFormDatePicker}>
-
+    <TextField
+     {...configFormDatePicker}
+     >
     </TextField>
   )
 }

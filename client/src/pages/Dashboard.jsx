@@ -8,13 +8,14 @@ import Friends from '../components/Friends';
 import HelpCenter from '../components/HelpCenter';
 
 import { useState } from 'react';
+import { EventProvider } from '../context/EventContext';
 
 
 function Profile() {
     const [dashboardView, setDashboardView] = useState("calendar");
 
-
     return (
+    <EventProvider>
     <Stack direction='column' spacing={1}>
         <Topbar />
         <Stack direction='row'>
@@ -23,10 +24,9 @@ function Profile() {
             dashboardView === "calendar" &&   
             <Box sx={{flex:9}}>
                 <Box sx={{marginRight:'20px', marginTop:'20px'}}>
-                    <Calendar />
+                    <Calendar/>
                 </Box>
             </Box>}
-
             {
             dashboardView === "settings" &&
             <Box sx={{flex:9}}>
@@ -50,6 +50,7 @@ function Profile() {
             }
         </Stack>
     </Stack>
+    </EventProvider>
   )
 }
 
