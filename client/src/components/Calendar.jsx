@@ -3,14 +3,14 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-import { useContext } from 'react';
+import { useContext} from 'react';
 import {EventContext} from '../context/EventContext';
 
 import {styled} from '@mui/material';
 
 function Calendar() {
+  const {events} = useContext(EventContext);
 
-  const {events, setEvents} = useContext(EventContext);
 
   const StyledFullCalendarWrapper = styled('div')(({theme}) => ({
     '.fc-toolbar button' : {
@@ -42,12 +42,18 @@ function Calendar() {
         dayMaxEventRows: true,
     }
 
+    function handleEventClick(info){
+      console.log(info);
+    }
+
   return (
     <StyledFullCalendarWrapper>
       
       <FullCalendar 
       themeSystem='slate'
-      {...configFullCalendar}    
+      eventClick={handleEventClick}
+      eventInteractive
+      {...configFullCalendar}  
       />
     </StyledFullCalendarWrapper>
     

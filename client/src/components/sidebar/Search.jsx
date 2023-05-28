@@ -11,7 +11,7 @@ const StyledSearch = styled(Box)(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     marginBottom: 10,
-    border: '1px solid white',
+    border: `1px solid ${theme.palette.text.primary}`,
     '&:hover': {
     },
   }));

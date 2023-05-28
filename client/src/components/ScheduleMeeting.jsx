@@ -14,7 +14,7 @@ import { EventContext } from '../context/EventContext';
 
 
 function ScheduleMeeting({handleClose}) {
-    const {events, setEvents} = useContext(EventContext);
+    const {setEvents} = useContext(EventContext);
 
     function handleSubmit(values){
         handleClose();
