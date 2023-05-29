@@ -42,7 +42,7 @@ function Register() {
     }
 
   return (
-    <Box sx={{height:'501px', width:'40%', marginLeft:'auto', marginRight:'auto'}}>
+    <Box sx={{height:'500px', width:'40%', marginLeft:'auto', marginRight:'auto'}}>
         <Formik
         initialValues={INITIAL_FORM_STATE}
         validationSchema={FORM_VALIDATION}
