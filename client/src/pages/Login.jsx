@@ -24,7 +24,7 @@ function Login() {
             id: res.data,
             isLoggedIn: true,
         });
-        localStorage.setItem("meetup-user", JSON.stringify({id: res.data}));
+        localStorage.setItem("meetup-user", JSON.stringify(res.data));
     }).catch((err) => {
         console.log(err);
     });

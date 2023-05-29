@@ -19,7 +19,6 @@ function Register() {
     const {auth, setAuth} = useContext(AuthContext);
 
     async function handleSubmit(values){
-        console.log(values);
         await axios.post(registerRoute, {
             firstName: values.firstName,
             lastName: values.lastName,
@@ -35,7 +34,7 @@ function Register() {
                 id: res.data,
                 isLoggedIn: true,
             });
-            localStorage.setItem("meetup-user", JSON.stringify({id: res.data}));
+            localStorage.setItem("meetup-user", JSON.stringify(res.data));
         }).catch((err) => {
             console.log(err);
         });

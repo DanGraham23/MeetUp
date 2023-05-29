@@ -1,4 +1,4 @@
-package com.dangraham23.server.controllers;
+package com.dangraham23.server.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
