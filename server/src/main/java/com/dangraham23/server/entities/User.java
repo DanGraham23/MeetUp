@@ -35,7 +35,7 @@ public class User {
     private String password;
 
     @Column(name="phoneNumber", nullable = false)
-    private Integer phoneNumber;
+    private Long phoneNumber;
 
     @Column(name="address", nullable = false)
     private String address;
@@ -60,7 +60,7 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String email, String firstName, String lastName, String password, Integer phoneNumber,
+    public User(Integer id, String email, String firstName, String lastName, String password, Long phoneNumber,
             String address, String country, String state, String city, Set<User> friends) {
         this.id = id;
         this.email = email;
@@ -115,11 +115,11 @@ public class User {
         this.password = password;
     }
 
-    public Integer getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

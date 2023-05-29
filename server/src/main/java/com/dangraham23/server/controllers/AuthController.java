@@ -2,6 +2,7 @@ package com.dangraham23.server.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,12 +16,13 @@ public class AuthController {
     AuthService authService;
 
     @PostMapping("/register")
-    public int registerUser(User user){
+    public int registerUser(@RequestBody User user){
         return authService.registerUser(user);
     }
 
     @PostMapping("/login")
-    public int loginUser(String email, String password){
-        return authService.loginUser(email, password);
+    public int loginUser(@RequestBody LoginRequest loginRequest){
+        System.out.println(loginRequest);
+        return authService.loginUser(loginRequest);
     }
 }

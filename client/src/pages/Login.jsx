@@ -59,6 +59,7 @@ function Login() {
                         <FormTextField 
                         name='password'
                         label='Password'
+                        type='password'
                         />
                     </Grid>
                     <Grid item xs={4} alignSelf='center'>
