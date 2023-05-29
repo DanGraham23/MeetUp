@@ -27,7 +27,7 @@ function App() {
               </Routes>
             </Box>
           </BrowserRouter>
-          <CssBaseline />
+          <CssBaseline enableColorScheme/>
       </ThemeProvider>
     </AuthProvider>
     </>

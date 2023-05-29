@@ -8,7 +8,6 @@ function FormTimePicker({name, ...otherProps}) {
     const configFormTimePicker = {
         ...otherProps,
         ...field,
-        variant:'outlined',
         type:'time',
         fullWidth: true,
         InputLabelProps: {

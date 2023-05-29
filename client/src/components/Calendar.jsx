@@ -13,20 +13,15 @@ function Calendar() {
 
 
   const StyledFullCalendarWrapper = styled('div')(({theme}) => ({
-    '.fc-toolbar button' : {
-      color:theme.palette.text.primary,
-      backgroundColor:theme.palette.background.default,
-      '&:hover': {
-        backgroundColor:theme.palette.action.hover,
-      },
-      '&:focus': {
-        backgroundColor:theme.palette.action.selected,
-      },
-      '&:active': {
-        backgroundColor:theme.palette.action.hover,
-        color:'red'
-      },
-    }
+    '--fc-border-color': theme.palette.text.primary,
+    '--fc-button-text-color': theme.palette.text.primary,
+    '--fc-button-bg-color': theme.palette.background.default,
+    '--fc-button-border-color': theme.palette.text.primary,
+    '--fc-button-hover-bg-color': theme.palette.primary.main,
+    '--fc-button-hover-text-color': theme.palette.text.primary,
+    '--fc-button-hover-border-color': theme.palette.background.default,
+    '--fc-button-active-bg-color': theme.palette.primary.dark,
+    '--fc-button-active-border-color': theme.palette.text.primary,
   }));
 
     const configFullCalendar = {

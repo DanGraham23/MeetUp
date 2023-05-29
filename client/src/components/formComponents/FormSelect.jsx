@@ -16,7 +16,6 @@ function FormSelect({name, options, ...otherProps}) {
         ...field,
         ...otherProps,
         select: true,
-        variant: 'outlined',
         fullWidth:true,
         onChange: handleChange,
     }

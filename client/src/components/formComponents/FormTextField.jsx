@@ -9,7 +9,6 @@ function FormTextField({name, ...otherProps}) {
     ...field,
     ...otherProps,
     fullWidth: true,
-    variant: 'outlined',
   }
 
   if (meta && meta.touched && meta.error){

@@ -65,6 +65,7 @@ function Register() {
                         <FormTextField 
                         name='email'
                         label='Email'
+                        variant='standard'
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -72,6 +73,7 @@ function Register() {
                         name='password'
                         label='Password'
                         type='password'
+                        variant='standard'
                         />
                     </Grid>
                     
@@ -84,18 +86,21 @@ function Register() {
                         <FormTextField 
                         name='firstName'
                         label='First Name'
+                        variant='standard'
                         />
                     </Grid>
                     <Grid item xs={4}>
                         <FormTextField 
                         name='lastName'
                         label='Last Name'
+                        variant='standard'
                         />
                     </Grid>
                     <Grid item xs={4}>
                         <FormTextField 
                         name='phone'
                         label='Phone Number'
+                        variant='standard'
                         />
                     </Grid>
 
@@ -108,6 +113,7 @@ function Register() {
                         <FormTextField 
                         name='address'
                         label='Address'
+                        variant='standard'
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -115,18 +121,21 @@ function Register() {
                         name='country'
                         label='Country'
                         options={countries}
+                        variant='standard'
                         />
                     </Grid>
                     <Grid item xs={4}>
                         <FormTextField 
                         name='state'
                         label='State'
+                        variant='standard'
                         />
                     </Grid>
                     <Grid item xs={4}>
                         <FormTextField 
                         name='city'
                         label='City'
+                        variant='standard'
                         />
                     </Grid>
                     <Grid item xs={4} alignSelf='center'>
