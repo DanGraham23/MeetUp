@@ -10,12 +10,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.dangraham23.requests.AddEventRequest;
-import com.dangraham23.responses.GetEventsResponse;
 import com.dangraham23.server.entities.Event;
 import com.dangraham23.server.entities.User;
 import com.dangraham23.server.repositories.EventRepository;
 import com.dangraham23.server.repositories.UserRepository;
+import com.dangraham23.server.requests.AddEventRequest;
+import com.dangraham23.server.responses.GetEventsResponse;
 
 @Service
 public class EventService {

@@ -1,9 +1,7 @@
 package com.dangraham23.server.entities;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -69,7 +67,7 @@ public class User implements UserDetails{
         joinColumns = @JoinColumn(name="user_id"),
         inverseJoinColumns = @JoinColumn(name="friend_id")
     )
-    private Set<User> friends = new HashSet<>();
+    private List<User> friends;
     
     @Enumerated
     private Role role;

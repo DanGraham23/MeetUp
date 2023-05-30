@@ -1,4 +1,4 @@
-package com.dangraham23.responses;
+package com.dangraham23.server.requests;
 
 import java.sql.Date;
 
@@ -11,14 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetEventsResponse {
-    private Integer id;
+public class AddEventRequest {
     private String title;
     private Date startDate;
     private Date endDate;
     private String description;
     private Integer host_id;
     private Integer guest_id;
-    private String host_email;
-    private String guest_email;
 }
