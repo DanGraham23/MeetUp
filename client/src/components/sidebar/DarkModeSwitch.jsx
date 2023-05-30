@@ -7,7 +7,7 @@ function DarkModeSwitch() {
   const {mode, toggleColorMode} = useThemeContext();
 
   function handleChange(){
-    localStorage.setItem("colorModePreference", mode === "light" ? "dark" : "light");
+    localStorage.setItem("meetup-color-preference", mode === "light" ? "dark" : "light");
     toggleColorMode();
     
   }

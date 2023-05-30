@@ -46,7 +46,7 @@ function Calendar() {
       
       <FullCalendar 
       themeSystem='slate'
-      eventClick={handleEventClick}
+      eventClick={(info) => info.event.remove()}
       eventInteractive
       {...configFullCalendar}  
       />

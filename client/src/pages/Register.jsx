@@ -11,11 +11,14 @@ import countries from '../data/countries.json';
 import axios from '../utils/axios';
 import {registerRoute} from '../utils/routes';
 
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
+
+import { useNavigate } from "react-router-dom";
 
 function Register() {
 
+    const navigate = useNavigate();
     const {auth, setAuth} = useContext(AuthContext);
 
     async function handleSubmit(values){
@@ -39,6 +42,12 @@ function Register() {
             console.log(err);
         });
     }
+
+    useEffect(() => {
+        if (localStorage.getItem("meetup-user")!== null){
+            navigate('/');
+        }
+    }, [auth.isLoggedIn]);
 
   return (
     <Box sx={{height:'500px', width:'40%', marginLeft:'auto', marginRight:'auto'}}>

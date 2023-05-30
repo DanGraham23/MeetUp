@@ -16,7 +16,7 @@ import { EventContext } from '../context/EventContext';
 function ScheduleMeeting({handleClose}) {
     const {setEvents} = useContext(EventContext);
 
-    function handleSubmit(values){
+    async function handleSubmit(values){
         handleClose();
         const start = values.startDate + "T"+values.startTime+":00";
         const end = values.startDate + "T"+values.endTime+":00";

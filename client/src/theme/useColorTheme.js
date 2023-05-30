@@ -5,11 +5,11 @@ import theme from "./Theme";
 export const useColorTheme = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-  if (!localStorage.getItem("colorModePreference")){
-    localStorage.setItem("colorModePreference", prefersDarkMode ? "dark" : "light" );
+  if (!localStorage.getItem("meetup-color-preference")){
+    localStorage.setItem("meetup-color-preference", prefersDarkMode ? "dark" : "light" );
   }
 
-  const initialState = localStorage.getItem("colorModePreference");
+  const initialState = localStorage.getItem("meetup-color-preference");
   const [mode, setMode] = useState(initialState || "light");
 
   const toggleColorMode = () =>
