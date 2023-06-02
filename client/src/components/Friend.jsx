@@ -1,6 +1,6 @@
 import {Avatar, Typography, Stack} from '@mui/material';
 
-function Friend() {
+function Friend({firstName, lastName, email, phoneNumber}) {
   return (
    <>
     <Stack direction='row' alignItems='center' gap={2}>
@@ -8,14 +8,14 @@ function Friend() {
       alt='John Doe' 
       src="https://material-ui.com/static/images/avatar/1.jpg" 
       sx={{ width: 50, height: 50}}/>
-      <Typography>
-        John Doe
+      <Typography variant='h6'>
+        {firstName} {lastName}
       </Typography>
       <Typography>
-        JohnDoe@Email.com
+        {email}
       </Typography>
       <Typography>
-        (123)-456-7890
+        {phoneNumber}
       </Typography>
       </Stack>
    </>

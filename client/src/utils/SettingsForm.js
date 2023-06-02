@@ -1,16 +1,5 @@
 import * as Yup from 'yup';
 
-export const INITIAL_FORM_STATE = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    phone: '',
-    address: '',
-    city: '',
-    state: '',
-    country: '',
-}; 
 export const FORM_VALIDATION = Yup.object().shape({
     firstName: Yup
         .string()

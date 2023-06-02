@@ -2,18 +2,33 @@ import { Avatar, Box, Typography,Grid, IconButton } from "@mui/material";
 import { Formik, Form } from "formik";
 
 import FormTextField from "./formComponents/FormTextField";
-import FormSelect from "./formComponents/FormTextField";
+import FormSelect from "./formComponents/FormSelect";
 import FormSubmitButton from "./formComponents/FormSubmitButton";
 
-import { INITIAL_FORM_STATE, FORM_VALIDATION } from "../utils/SettingsForm";
+import { FORM_VALIDATION } from "../utils/SettingsForm";
 
 import countries from '../data/countries.json';
 
-function Settings() {
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
+function Settings() {
+    const {user} = useContext(UserContext);
     function handleSubmit(values){
         console.log(values);
     }
+
+    const INITIAL_FORM_STATE = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        password: '',
+        phone: user.phoneNumber,
+        address: user.address,
+        city: user.city,
+        state: user.state,
+        country: user.country,
+    }; 
 
   return (
     <Box>
@@ -50,7 +65,7 @@ function Settings() {
                     <Grid item xs={4}>
                         <FormTextField 
                         name='phone'
-                        label='Phone Number'
+                        label='Phone'
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -97,11 +112,10 @@ function Settings() {
                     <Grid item xs={6}>
                         <FormTextField 
                         name='password'
-                        label='Password'
+                        label='Current Password'
                         type='password'
                         />
                     </Grid>
-
                     <Grid item xs={4} alignSelf='center'>
                         <FormSubmitButton>
                             Apply Changes

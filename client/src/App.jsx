@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import { useThemeContext } from './theme/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import { UserProvider } from './context/UserContext';
+import { EventProvider } from './context/EventContext';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     <>
     <AuthProvider>
       <UserProvider>
+        <EventProvider>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
               <Box>
@@ -31,6 +33,7 @@ function App() {
             </BrowserRouter>
             <CssBaseline enableColorScheme/>
         </ThemeProvider>
+        </EventProvider>
       </UserProvider>
     </AuthProvider>
     </>

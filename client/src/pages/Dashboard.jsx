@@ -8,15 +8,17 @@ import Friends from '../components/Friends';
 import HelpCenter from '../components/HelpCenter';
 
 import { useState, useEffect, useContext } from 'react';
-import { EventProvider } from '../context/EventContext';
 
 import {axiosPrivate} from '../utils/axios';
-import { getUserRoute } from '../utils/routes';
+import { getEventsRoute, getUserRoute } from '../utils/routes';
 import { UserContext } from '../context/UserContext';
+import { EventContext } from '../context/EventContext';
 
 function Profile() {
     const [dashboardView, setDashboardView] = useState("calendar");
     const {user, setUser} = useContext(UserContext);
+    const {events, setEvents} = useContext(EventContext);
+
     async function fetchUser(){
         await axiosPrivate.get(getUserRoute).then((res) => {
             setUser(res.data);
@@ -24,13 +26,24 @@ function Profile() {
             console.log(err);
         });
     }
+    async function fetchEvents(){
+        await axiosPrivate.get(getEventsRoute).then((res) => {
+            setEvents((prevEvents) => [...prevEvents, res.data])
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+    useEffect(() => {
+        if (user){
+            fetchEvents();
+        }
+    }, [user]);
 
     useEffect(() => {
         fetchUser();
     }, []);
 
     return (
-    <EventProvider>
     <Stack direction='column' spacing={1}>
         <Topbar />
         <Stack direction='row'>
@@ -65,7 +78,6 @@ function Profile() {
             }
         </Stack>
     </Stack>
-    </EventProvider>
   )
 }
 
