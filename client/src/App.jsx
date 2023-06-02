@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import { useThemeContext } from './theme/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
+import { UserProvider } from './context/UserContext';
 
 function App() {
 
@@ -15,20 +16,22 @@ function App() {
   return (
     <>
     <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-            <Box>
-              <Routes>
-                <Route path='/login' element={<Login />}/>
-                <Route path='/register' element={<Register />}/>
-                <Route path='/' element={<Home />}/>
-                <Route path='/dashboard/:username' element={<Dashboard />}/>
-                <Route path='*' element={<Home />}/>  
-              </Routes>
-            </Box>
-          </BrowserRouter>
-          <CssBaseline enableColorScheme/>
-      </ThemeProvider>
+      <UserProvider>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+              <Box>
+                <Routes>
+                  <Route path='/login' element={<Login />}/>
+                  <Route path='/register' element={<Register />}/>
+                  <Route path='/' element={<Home />}/>
+                  <Route path='/dashboard' element={<Dashboard />}/>
+                  <Route path='*' element={<Home />}/>  
+                </Routes>
+              </Box>
+            </BrowserRouter>
+            <CssBaseline enableColorScheme/>
+        </ThemeProvider>
+      </UserProvider>
     </AuthProvider>
     </>
   )

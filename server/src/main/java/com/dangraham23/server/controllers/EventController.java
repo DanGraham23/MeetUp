@@ -22,12 +22,12 @@ public class EventController {
     @Autowired
     EventService eventService;
 
-    @PostMapping("/")
+    @PostMapping
     public boolean addEvent(@RequestBody AddEventRequest eventRequest){
         return eventService.addEvent(eventRequest);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<GetEventsResponse> getEvents(){
         return eventService.getEvents();
     }

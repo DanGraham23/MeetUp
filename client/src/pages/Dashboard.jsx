@@ -7,12 +7,27 @@ import Settings from '../components/Settings';
 import Friends from '../components/Friends';
 import HelpCenter from '../components/HelpCenter';
 
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { EventProvider } from '../context/EventContext';
 
+import {axiosPrivate} from '../utils/axios';
+import { getUserRoute } from '../utils/routes';
+import { UserContext } from '../context/UserContext';
 
 function Profile() {
     const [dashboardView, setDashboardView] = useState("calendar");
+    const {user, setUser} = useContext(UserContext);
+    async function fetchUser(){
+        await axiosPrivate.get(getUserRoute).then((res) => {
+            setUser(res.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    useEffect(() => {
+        fetchUser();
+    }, []);
 
     return (
     <EventProvider>

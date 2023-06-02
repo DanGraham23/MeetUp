@@ -1,5 +1,6 @@
 package com.dangraham23.server.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.dangraham23.server.entities.User;
 import com.dangraham23.server.repositories.UserRepository;
+import com.dangraham23.server.responses.GetFriendResponse;
 import com.dangraham23.server.responses.GetUserResponse;
 
 @Service
@@ -20,6 +22,8 @@ public class UserService {
     UserRepository userRepository;
 
     public GetUserResponse getUser(){
+        System.out.println("dwjiadipadwpji");
+        System.out.println("dwjiadipadwpji");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
@@ -95,5 +99,33 @@ public class UserService {
             }
         }
         return false;
+    }
+
+    public List<GetFriendResponse> getFriends(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) principal;
+                var userEmail = userDetails.getUsername();
+                Optional<User> foundUser = userRepository.findByEmail(userEmail);
+                if (foundUser.isPresent()){
+                    var user = foundUser.get();
+                    List<GetFriendResponse> friends = new ArrayList<>();
+                    for (User friend : user.getFriends()){
+                        var friendResponse = GetFriendResponse.builder()
+                        .email(friend.getEmail())
+                        .phoneNumber(friend.getPhoneNumber())
+                        .firstName(friend.getFirstName())
+                        .lastName(friend.getLastName())
+                        .id(friend.getId())
+                        .build();
+                        friends.add(friendResponse);
+                    }
+                    return friends;
+                }
+            }
+        }
+        return null;
     }
 }

@@ -1,5 +1,7 @@
 package com.dangraham23.server.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dangraham23.server.responses.GetFriendResponse;
 import com.dangraham23.server.responses.GetUserResponse;
 import com.dangraham23.server.services.UserService;
 
@@ -19,12 +22,13 @@ public class UserController {
     @Autowired
     UserService userService;
     
-    @GetMapping("/")
+    @GetMapping
     public GetUserResponse getUser(){
+        System.out.println("controllerrrrr");
         return userService.getUser();
     }
 
-    @PutMapping("/")
+    @PutMapping
     public boolean updateUser(){
         return userService.updateUser();
     }
@@ -37,5 +41,10 @@ public class UserController {
     @DeleteMapping("/delete-friend/{id}")
     public boolean removeFriend(@PathVariable("id") Integer friendId){
         return userService.removeFriend(friendId);
+    }
+
+    @GetMapping("/friends")
+    public List<GetFriendResponse> getFriends(){
+        return userService.getFriends();
     }
 }

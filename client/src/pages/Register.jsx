@@ -45,7 +45,7 @@ function Register() {
 
     useEffect(() => {
         if (localStorage.getItem("meetup-user")!== null){
-            navigate('/');
+            navigate('/dashboard');
         }
     }, [auth.isLoggedIn]);
 
