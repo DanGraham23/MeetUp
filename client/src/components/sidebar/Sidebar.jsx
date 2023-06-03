@@ -9,9 +9,7 @@ import {
 } from '@mui/material';
 
 import { useState } from 'react';
-import ScheduleMeetingModal from '../ScheduleMeetingModal';
-
-import Search from './Search';
+import {useNavigate} from 'react-router-dom'
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PeopleIcon from '@mui/icons-material/People';
@@ -20,6 +18,8 @@ import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
 
+import ScheduleMeetingModal from '../ScheduleMeetingModal';
+import Search from './Search';
 import DarkModeSwitch from './DarkModeSwitch';
 
 const StyledBox = styled(Box)(({theme}) => ({
@@ -28,10 +28,11 @@ const StyledBox = styled(Box)(({theme}) => ({
     height: '100vh',
 }));
 
-function Sidebar({setDashboardView}) {
+function Sidebar() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   return (
     <StyledBox>
@@ -49,7 +50,7 @@ function Sidebar({setDashboardView}) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => setDashboardView("friends")}>
+            <ListItemButton onClick={() => navigate("/dashboard/friends")}>
               <ListItemIcon>
                 <PeopleIcon/>
               </ListItemIcon>
@@ -57,7 +58,7 @@ function Sidebar({setDashboardView}) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => setDashboardView("calendar")}>
+            <ListItemButton onClick={() => navigate("/dashboard/calendar")}>
               <ListItemIcon>
                 <CalendarMonthIcon/>
               </ListItemIcon>
@@ -82,7 +83,7 @@ function Sidebar({setDashboardView}) {
       <nav aria-label="tertiary mailbox folders">
         <List>
           <ListItem disablePadding>
-            <ListItemButton  onClick={() => setDashboardView("settings")}>
+            <ListItemButton  onClick={() => navigate("/dashboard/settings")}>
               <ListItemIcon>
                 <SettingsIcon/>
               </ListItemIcon>
@@ -90,7 +91,7 @@ function Sidebar({setDashboardView}) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => setDashboardView("help")}>
+            <ListItemButton onClick={() => navigate("/dashboard/help")}>
               <ListItemIcon>
                 <HelpCenterIcon/>
               </ListItemIcon>

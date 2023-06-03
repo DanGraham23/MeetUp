@@ -1,9 +1,10 @@
-import { Avatar, Box, Typography,Grid, IconButton } from "@mui/material";
+import { Avatar, Box, Typography,Grid, IconButton, Stack } from "@mui/material";
 import { Formik, Form } from "formik";
 
-import FormTextField from "./formComponents/FormTextField";
-import FormSelect from "./formComponents/FormSelect";
-import FormSubmitButton from "./formComponents/FormSubmitButton";
+import FormTextField from "../components/formComponents/FormTextField";
+import FormSelect from "../components/formComponents/FormSelect";
+import FormSubmitButton from "../components/formComponents/FormSubmitButton";
+import DashboardView from "../components/DashboardView";
 
 import { FORM_VALIDATION } from "../utils/SettingsForm";
 
@@ -11,9 +12,11 @@ import countries from '../data/countries.json';
 
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { convertPhoneNumber } from "../common/convert";
 
 function Settings() {
     const {user} = useContext(UserContext);
+
     function handleSubmit(values){
         console.log(values);
     }
@@ -23,7 +26,7 @@ function Settings() {
         lastName: user.lastName,
         email: user.email,
         password: '',
-        phone: user.phoneNumber,
+        phone: convertPhoneNumber(user.phoneNumber),
         address: user.address,
         city: user.city,
         state: user.state,
@@ -31,7 +34,8 @@ function Settings() {
     }; 
 
   return (
-    <Box>
+    <DashboardView>
+        <Box>
         <Formik
         validationSchema={FORM_VALIDATION}
         initialValues={INITIAL_FORM_STATE}
@@ -125,6 +129,7 @@ function Settings() {
             </Form>
         </Formik>
     </Box>
+    </DashboardView>
   )
 }
 

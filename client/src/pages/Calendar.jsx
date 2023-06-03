@@ -3,14 +3,18 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-import { useContext} from 'react';
+import { useContext, useEffect} from 'react';
 import {EventContext} from '../context/EventContext';
 
 import {styled} from '@mui/material';
 
-function Calendar() {
-  const {events} = useContext(EventContext);
+import DashboardView from '../components/DashboardView';
 
+import {getEventsRoute} from '../utils/routes';
+import {axiosPrivate} from '../utils/axios';
+
+function Calendar() {
+  const {events, setEvents} = useContext(EventContext);
 
   const StyledFullCalendarWrapper = styled('div')(({theme}) => ({
     '--fc-border-color': theme.palette.text.primary,
@@ -37,21 +41,46 @@ function Calendar() {
         dayMaxEventRows: true,
     }
 
+    async function fetchEvents(){
+      await axiosPrivate.get(getEventsRoute).then((res) => {
+          const newEventsData = res.data;
+          if (newEventsData.length == 0) return;
+          const newEvents = newEventsData.map((newEvent) => {
+              return { id: newEvent.id,
+              title: newEvent.title,
+              start: newEvent.startDate,
+              end: newEvent.endDate,
+              extendedProps: {
+                  location: 'Online',
+                  description: newEvent.description,
+                  },
+              }
+          })
+          setEvents((prevEvents) => [...prevEvents, ...newEvents])
+      }).catch((err) => {
+          console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
     function handleEventClick(info){
       console.log(info);
     }
 
   return (
-    <StyledFullCalendarWrapper>
-      
-      <FullCalendar 
-      themeSystem='slate'
-      eventClick={(info) => info.event.remove()}
-      eventInteractive
-      {...configFullCalendar}  
-      />
-    </StyledFullCalendarWrapper>
-    
+    <DashboardView>
+      <StyledFullCalendarWrapper>
+        <FullCalendar 
+        themeSystem='slate'
+        eventClick={(info) => info.event.remove()}
+        eventInteractive
+        {...configFullCalendar}  
+        />
+      </StyledFullCalendarWrapper>   
+    </DashboardView>
   )
 }
 

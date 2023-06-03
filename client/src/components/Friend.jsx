@@ -1,5 +1,7 @@
 import {Avatar, Typography, Stack} from '@mui/material';
 
+import { convertPhoneNumber } from '../common/convert';
+
 function Friend({firstName, lastName, email, phoneNumber}) {
   return (
    <>
@@ -15,7 +17,7 @@ function Friend({firstName, lastName, email, phoneNumber}) {
         {email}
       </Typography>
       <Typography>
-        {phoneNumber}
+        {convertPhoneNumber(phoneNumber)}
       </Typography>
       </Stack>
    </>
