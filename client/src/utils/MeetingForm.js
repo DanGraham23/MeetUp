@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 
 export const INITIAL_FORM_STATE = {
     title: '',
+    friend: '',
     startDate: '',
     startTime: '',
     endTime: '',
@@ -12,6 +13,9 @@ export const INITIAL_FORM_STATE = {
 
 export const FORM_VALIDATION = Yup.object().shape({
     title: Yup
+        .string()
+        .required('Required'),
+    friend: Yup
         .string()
         .required('Required'),
     startDate: Yup

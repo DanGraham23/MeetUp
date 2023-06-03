@@ -6,12 +6,13 @@ import FormDatePicker from './formComponents/FormDatePicker';
 import FormTosCheckbox from './formComponents/FormTosCheckbox';
 import FormSubmitButton from './formComponents/FormSubmitButton';
 import FormTimePicker from './formComponents/FormTimePicker';
+import FormSelect from './formComponents/FormSelect';
 
 import { INITIAL_FORM_STATE, FORM_VALIDATION } from '../utils/MeetingForm';
 
 import { useContext } from 'react';
 import { EventContext } from '../context/EventContext';
-
+import countries from '../data/countries.json';
 
 function ScheduleMeeting({handleClose}) {
     const {setEvents} = useContext(EventContext);
@@ -42,55 +43,62 @@ function ScheduleMeeting({handleClose}) {
         >
             <Form>
                 <Grid container spacing={2}>
+                <Grid item xs={6}>
+                    <FormTextField 
+                    name='title'
+                    label='Give our meeting a title...'
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <FormSelect 
+                        name='friend'
+                        label='Pick a friend'
+                        options={countries}
+                        />
+                </Grid>
                 <Grid item xs={12}>
-                        <FormTextField 
-                        name='title'
-                        label='Give our meeting a title...'
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography>
-                            Meeting Details
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <FormDatePicker 
-                        name='startDate'    
-                        label='Start date'
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <FormTimePicker 
-                        name='startTime'    
-                        label='Start time'
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <FormTimePicker 
-                        name='endTime'    
-                        label='End time'
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormTextField 
-                        name='description'
-                        label='Anything you would like me to know about our meeting?'
-                        multiline={true}
-                        rows={4}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormTosCheckbox 
-                        name='tos'
-                        label='Agree'
-                        legend='Terms of service'
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <FormSubmitButton>
-                            Schedule Meeting
-                        </FormSubmitButton>
-                    </Grid>
+                    <Typography>
+                        Meeting Details
+                    </Typography>
+                </Grid>
+                <Grid item xs={4}>
+                    <FormDatePicker 
+                    name='startDate'    
+                    label='Start date'
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <FormTimePicker 
+                    name='startTime'    
+                    label='Start time'
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <FormTimePicker 
+                    name='endTime'    
+                    label='End time'
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <FormTextField 
+                    name='description'
+                    label='Anything you would like me to know about our meeting?'
+                    multiline={true}
+                    rows={4}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <FormTosCheckbox 
+                    name='tos'
+                    label='Agree'
+                    legend='Terms of service'
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <FormSubmitButton>
+                        Schedule Meeting
+                    </FormSubmitButton>
+                </Grid>
                 </Grid>
             </Form>
         </Formik>

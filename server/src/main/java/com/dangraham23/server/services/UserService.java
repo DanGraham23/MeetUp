@@ -22,8 +22,6 @@ public class UserService {
     UserRepository userRepository;
 
     public GetUserResponse getUser(){
-        System.out.println("dwjiadipadwpji");
-        System.out.println("dwjiadipadwpji");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
@@ -126,6 +124,35 @@ public class UserService {
                 }
             }
         }
+        return null;
+    }
+
+    public List<GetFriendResponse> searchUsers(String email){
+        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // if (authentication.isAuthenticated()) {
+        //     Object principal = authentication.getPrincipal();
+        //     if (principal instanceof UserDetails) {
+        //         UserDetails userDetails = (UserDetails) principal;
+        //         var userEmail = userDetails.getUsername();
+        //         Optional<User> foundUser = userRepository.findByEmail(userEmail);
+        //         if (foundUser.isPresent()){
+        //             var user = foundUser.get();
+        //             List<User> nonFriendUsers = userRepository.findByEmailContainingAndNotFriends(email, user.getId());
+        //             List<GetFriendResponse> friends = new ArrayList<>();
+        //             for (User friend : nonFriendUsers) {
+        //                 var friendResponse = GetFriendResponse.builder()
+        //                         .email(friend.getEmail())
+        //                         .phoneNumber(friend.getPhoneNumber())
+        //                         .firstName(friend.getFirstName())
+        //                         .lastName(friend.getLastName())
+        //                         .id(friend.getId())
+        //                         .build();
+        //                 friends.add(friendResponse);
+        //             }
+        //             return friends;
+        //         }
+        //     }
+        // }
         return null;
     }
 }

@@ -12,6 +12,6 @@ export const axiosPrivate = axios.create({
     withCredentials:true,
     headers: {
         'Content-Type':'application/json',
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huQGVtYWlsLmNvbSIsImlhdCI6MTY4NTgwODE4NywiZXhwIjoxNjg1ODIyNTg3fQ.5X586tzsqfsAGrioQWZg_COy-RzsUhuRvT2XkdpEQXg`
+        Authorization: `Bearer `
     },
 });

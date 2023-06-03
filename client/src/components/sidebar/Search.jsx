@@ -7,6 +7,8 @@ import {
 
 import SearchIcon from '@mui/icons-material/Search';
 
+import {axiosPrivate} from '../../utils/axios';
+
 const StyledSearch = styled(Box)(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -47,7 +49,7 @@ function Search() {
             <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-        placeholder="Search…"
+        placeholder="Search by email..."
         inputProps={{ 'aria-label': 'search' }}
         />
     </StyledSearch>

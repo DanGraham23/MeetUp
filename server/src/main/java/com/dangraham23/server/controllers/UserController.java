@@ -24,7 +24,6 @@ public class UserController {
     
     @GetMapping
     public GetUserResponse getUser(){
-        System.out.println("controllerrrrr");
         return userService.getUser();
     }
 
@@ -46,5 +45,10 @@ public class UserController {
     @GetMapping("/friends")
     public List<GetFriendResponse> getFriends(){
         return userService.getFriends();
+    }
+
+    @GetMapping("/search/{email}")
+    public List<GetFriendResponse> searchUsers(@PathVariable("email") String email){
+        return userService.searchUsers(email);
     }
 }
