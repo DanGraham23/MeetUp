@@ -23,21 +23,20 @@ Backend: Java Spring Boot, PostgreSQL
 
 ---- Todo ----
 
-Calendar:
-- Popover with event information and option to remove event
-- Correctly store event from API in context to display on calendar
-
-Schedule Meeting Modal:
-- Option to pick a friend to add to meeting + connect to API
-
 Search:
-- Implement endpoint and functionality to find users to add to friends lsit
+- Implement endpoint and functionality to find users to add to friends list
 
 General:
 - Add option to upload profile picture (store with S3 bucket)
 - Add landing page
 - API should set JWT in response header, currently needs to be manually put in axios instance after logging in
+- Improve Styling, Responsiveness, and Accessibility
 
+Bugs:
+- Events are listen twice when pulled from API
+- Users current settings displays only after a page update
+- Events that the current user is a guest of should be put onto calendar with the host listed on modal instead of guest
+- Friends are currently a one-way feature (X adds Y, X has friend Y, Y has no friend). I might keep this for now and implement friend requests later.
 
 This is a current image of the main dashboard component. The design will change significantly as I add functionality: 
 
