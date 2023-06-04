@@ -18,20 +18,14 @@ Backend: Java Spring Boot, PostgreSQL
 - Dark mode/Light mode toggle, persisted in local storage and uses browser preference as default
 - Calendar on dashboard to display user events
 - Modal form to schedule meetings with other users
-- Settings page is filled out with current user details
-- Friends list displays current friends
+- Settings page to view and update user information
+- Friends list displays current friends with option to remove
 
 ---- Todo ----
 
 Calendar:
 - Popover with event information and option to remove event
 - Correctly store event from API in context to display on calendar
-
-Settings:
-- Connect to update API endpoint and check if user password matches current password
-
-Friends:
-- Option to remove friend + connect to API
 
 Schedule Meeting Modal:
 - Option to pick a friend to add to meeting + connect to API
