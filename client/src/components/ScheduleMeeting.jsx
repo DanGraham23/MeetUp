@@ -9,7 +9,6 @@ import FormTimePicker from './formComponents/FormTimePicker';
 import FormSelect from './formComponents/FormSelect';
 
 import { INITIAL_FORM_STATE, FORM_VALIDATION } from '../utils/MeetingForm';
-import countries from '../data/countries.json';
 
 import { useContext, useState, useEffect } from 'react';
 import { EventContext } from '../context/EventContext';
@@ -41,19 +40,6 @@ function ScheduleMeeting({handleClose}) {
 
     async function handleSubmit(values){
         handleClose();
-        //This maps the event for the full calendar component to use
-        // const start = values.startDate + "T"+values.startTime+":00";
-        // const end = values.startDate + "T"+values.endTime+":00";
-        // const event = {
-        //     id: 10,
-        //     title: values.title,
-        //     start,
-        //     end,
-        //     extendedProps: {
-        //         location: "Online",
-        //         description: values.description
-        //     }
-        // }
         //This maps the event to be used by the backend API
         const start = values.startDate + "T"+values.startTime+":00";
         const end = values.startDate + "T"+values.endTime+":00";
@@ -69,7 +55,13 @@ function ScheduleMeeting({handleClose}) {
             console.log(err);
         })
 
-        console.log(values);
+        console.log({
+            title: values.title,
+            startDate: start,
+            endDate: end,
+            description: values.description,
+            guest_id: values.friend
+        });
         setEvents((prevEvents) => [...prevEvents, event]);
     }
 

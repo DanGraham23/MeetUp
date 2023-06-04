@@ -3,18 +3,23 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-import { useContext, useEffect} from 'react';
+import { useContext, useEffect, useState} from 'react';
 import {EventContext} from '../context/EventContext';
 
 import {styled} from '@mui/material';
 
 import DashboardView from '../components/DashboardView';
+import EventInfoModal from '../components/EventInfoModal';
 
 import {getEventsRoute} from '../utils/routes';
 import {axiosPrivate} from '../utils/axios';
 
 function Calendar() {
   const {events, setEvents} = useContext(EventContext);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const StyledFullCalendarWrapper = styled('div')(({theme}) => ({
     '--fc-border-color': theme.palette.text.primary,
@@ -53,7 +58,11 @@ function Calendar() {
               extendedProps: {
                   location: 'Online',
                   description: newEvent.description,
-                  },
+                },
+              guest: {
+                  id: newEvent.guest_id,
+                  email: newEvent.guest_email
+                }
               }
           })
           setEvents((prevEvents) => [...prevEvents, ...newEvents])
@@ -67,7 +76,8 @@ function Calendar() {
   }, []);
 
     function handleEventClick(info){
-      console.log(info);
+      handleOpen();
+      setSelectedEvent(info.event);
     }
 
   return (
@@ -75,11 +85,12 @@ function Calendar() {
       <StyledFullCalendarWrapper>
         <FullCalendar 
         themeSystem='slate'
-        eventClick={(info) => info.event.remove()}
+        eventClick={handleEventClick}
         eventInteractive
         {...configFullCalendar}  
         />
       </StyledFullCalendarWrapper>   
+      <EventInfoModal open={open} handleClose={handleClose} selectedEvent={selectedEvent}/>
     </DashboardView>
   )
 }

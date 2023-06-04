@@ -1,6 +1,6 @@
 package com.dangraham23.server.responses;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class GetEventsResponse {
     private Integer id;
     private String title;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String description;
     private Integer host_id;
     private Integer guest_id;

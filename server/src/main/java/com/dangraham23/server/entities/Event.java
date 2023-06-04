@@ -1,6 +1,6 @@
 package com.dangraham23.server.entities;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,10 +32,10 @@ public class Event {
     private String title;
 
     @Column(name="startDate", nullable = false)
-    private Date startDate;
+    private LocalDateTime startDate;
 
     @Column(name="endDate", nullable = false)
-    private Date endDate;
+    private LocalDateTime endDate;
 
     @Column(name="description")
     private String description;
