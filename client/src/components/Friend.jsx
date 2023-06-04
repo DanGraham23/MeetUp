@@ -1,8 +1,32 @@
-import {Avatar, Typography, Stack} from '@mui/material';
+import {Avatar, Typography, Stack, Button, styled} from '@mui/material';
 
 import { convertPhoneNumber } from '../common/convert';
 
-function Friend({firstName, lastName, email, phoneNumber}) {
+import axios, { axiosPrivate } from '../utils/axios';
+import { deleteFriendRoute } from '../utils/routes';
+
+const StyledButton = styled(Button)(({theme}) => ({
+  ...theme.typography.button,
+  backgroundColor: theme.palette.error.main,
+  color: theme.palette.error.contrastText,
+  '&:hover': {
+    backgroundColor: theme.palette.error.dark,
+  },
+}));
+
+function Friend({id, firstName, lastName, email, phoneNumber,friends, setFriends}) {
+
+
+  async function handleRemoveFriend(e){
+    const updatedFriends = friends.filter((friend) => friend.id != id);
+    setFriends(updatedFriends);
+    await axiosPrivate.delete(`${deleteFriendRoute}/${id}`).then((res) => {
+      console.log("removed friend");
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
    <>
     <Stack direction='row' alignItems='center' gap={2}>
@@ -19,6 +43,7 @@ function Friend({firstName, lastName, email, phoneNumber}) {
       <Typography>
         {convertPhoneNumber(phoneNumber)}
       </Typography>
+      <StyledButton variant='contained' onClick={handleRemoveFriend}>Remove</StyledButton>
       </Stack>
    </>
   )

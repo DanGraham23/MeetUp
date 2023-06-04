@@ -26,14 +26,17 @@ function Friends() {
       <Stack gap={2}>
         {friends.length === 0 ?
           <div>Add a friend to see them here!</div> :
-          friends.map((friend, idx) => {
+          friends.map((friend) => {
             return (
             <Friend
             key={friend.id}
+            id={friend.id}
             firstName={friend.firstName}
             lastName={friend.lastName}
             email={friend.email}
             phoneNumber={friend.phoneNumber}
+            friends={friends}
+            setFriends={setFriends}
             />)
           })  
         } 

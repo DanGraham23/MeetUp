@@ -35,7 +35,7 @@ function Login() {
 
   useEffect(() => {
     if (localStorage.getItem("meetup-user")!== null){
-        navigate('/dashboard');
+        navigate('/dashboard/calendar');
     }
 }, [auth.isLoggedIn]);
 
