@@ -13,12 +13,28 @@ import countries from '../data/countries.json';
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { convertPhoneNumber } from "../common/convert";
+import { axiosPrivate } from "../utils/axios";
+import { updateUserRoute } from "../utils/routes";
 
 function Settings() {
     const {user} = useContext(UserContext);
 
-    function handleSubmit(values){
-        console.log(values);
+    async function handleSubmit(values){
+        await axiosPrivate.put(updateUserRoute, {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            email: values.email,
+            password: values.password,
+            phoneNumber: values.phone,
+            address: values.address,
+            city: values.city,
+            state: values.state,
+            country: values.country,
+        }).then((res) => {
+            console.log("updated settings");
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 
     const INITIAL_FORM_STATE = {
@@ -26,7 +42,7 @@ function Settings() {
         lastName: user.lastName,
         email: user.email,
         password: '',
-        phone: convertPhoneNumber(user.phoneNumber),
+        phone: user.phoneNumber,
         address: user.address,
         city: user.city,
         state: user.state,

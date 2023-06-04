@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.dangraham23.server.auth.RegisterRequest;
 import com.dangraham23.server.entities.User;
 import com.dangraham23.server.repositories.UserRepository;
 import com.dangraham23.server.responses.GetFriendResponse;
@@ -20,6 +22,9 @@ public class UserService {
     
     @Autowired
     UserRepository userRepository;
+    
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public GetUserResponse getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -49,7 +54,40 @@ public class UserService {
         return null;
     }
     
-    public boolean updateUser(){
+    public boolean updateUser(RegisterRequest updateRequest){
+        System.out.println(updateRequest);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) principal;
+                var userEmail = userDetails.getUsername();
+                Optional<User> foundUser = userRepository.findByEmail(userEmail);
+                if (!userEmail.equals(updateRequest.getEmail())){
+                    Optional<User> existingUserWithEmail = userRepository.findByEmail(updateRequest.getEmail());
+                    if (existingUserWithEmail.isPresent()) return false;
+                }
+                if (foundUser.isPresent()){
+                    var user = foundUser.get();
+                    var hashedPassword = user.getPassword();
+                    var requestPassword = updateRequest.getPassword();
+                    boolean matchingPassword = passwordEncoder.matches(requestPassword, hashedPassword);
+                    if (matchingPassword){
+                        user.setFirstName(updateRequest.getFirstName());
+                        user.setLastName(updateRequest.getLastName());;
+                        user.setPhoneNumber(updateRequest.getPhoneNumber());
+                        user.setAddress(updateRequest.getAddress());
+                        user.setCountry(updateRequest.getCountry());
+                        user.setState(updateRequest.getState());
+                        user.setCity(updateRequest.getCity());
+                        user.setEmail(updateRequest.getEmail());
+                        userRepository.save(user);
+                    }else{
+                        return false;
+                    }
+                }
+            }
+        }
         return false;
     }
 

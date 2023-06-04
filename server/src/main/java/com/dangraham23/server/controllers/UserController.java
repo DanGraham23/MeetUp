@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dangraham23.server.auth.RegisterRequest;
 import com.dangraham23.server.responses.GetFriendResponse;
 import com.dangraham23.server.responses.GetUserResponse;
 import com.dangraham23.server.services.UserService;
@@ -28,8 +30,8 @@ public class UserController {
     }
 
     @PutMapping
-    public boolean updateUser(){
-        return userService.updateUser();
+    public boolean updateUser(@RequestBody RegisterRequest updateRequest){
+        return userService.updateUser(updateRequest);
     }
 
     @PostMapping("/add-friend/{id}")

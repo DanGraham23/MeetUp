@@ -9,13 +9,34 @@ import FormTimePicker from './formComponents/FormTimePicker';
 import FormSelect from './formComponents/FormSelect';
 
 import { INITIAL_FORM_STATE, FORM_VALIDATION } from '../utils/MeetingForm';
-
-import { useContext } from 'react';
-import { EventContext } from '../context/EventContext';
 import countries from '../data/countries.json';
+
+import { useContext, useState, useEffect } from 'react';
+import { EventContext } from '../context/EventContext';
+import { getFriendsRoute } from '../utils/routes';
+import { axiosPrivate } from '../utils/axios';
+
 
 function ScheduleMeeting({handleClose}) {
     const {setEvents} = useContext(EventContext);
+    const [friendOptions, setFriendOptions] = useState([]);
+
+    async function fetchFriends(){
+        await axiosPrivate.get(getFriendsRoute).then((res) =>{
+          const friends = res.data;
+          if (res.data.length < 1) return;
+          setFriendOptions(friends.map((friend) => ({
+            value:friend.id,
+            label:friend.email
+          })));
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+
+      useEffect(() => {
+        fetchFriends();
+      }, [])
 
     async function handleSubmit(values){
         handleClose();
