@@ -1,5 +1,7 @@
-import { Box, Typography, Modal, styled, IconButton  } from '@mui/material';
+import { Box, Typography, Modal, styled, IconButton, Stack, Button  } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { axiosPrivate } from '../utils/axios';
+import { deleteEventRoute } from '../utils/routes';
 
 const StyledBox = styled(Box)(({theme})=> ({
   position: 'absolute',
@@ -17,7 +19,27 @@ const StyledBox = styled(Box)(({theme})=> ({
   paddingTop:25,
 }));
 
+const StyledButton = styled(Button)(({theme}) => ({
+    ...theme.typography.button,
+    backgroundColor: theme.palette.error.main,
+    color: theme.palette.error.contrastText,
+    '&:hover': {
+      backgroundColor: theme.palette.error.dark,
+    },
+  }));
+
 function EventInfoModal({open, handleClose, selectedEvent}) {
+
+    async function handleDeleteEvent(){
+        if (selectedEvent){
+            await axiosPrivate.delete(`${deleteEventRoute}/${selectedEvent.id}`).then((res) => {
+                console.log("event removed");
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+    }
+
   return (
     <Modal
         open={open}
@@ -29,15 +51,9 @@ function EventInfoModal({open, handleClose, selectedEvent}) {
           <IconButton size='medium' onClick={handleClose} sx={{marginLeft:'auto', marginRight:'10%'}}>
             <CloseIcon fontSize='medium'/>
           </IconButton>
-        {selectedEvent && <Box>
-            <Typography variant="h6" component="h2">
-                {'Meeting: ' + selectedEvent.title}
-            </Typography>
-            <Typography variant="h6" component="h2">
-                {'Start time: ' + selectedEvent.start}
-            </Typography>
-            <Typography variant="h6" component="h2">
-                {'End time: ' + selectedEvent.end}
+        {selectedEvent && <Stack gap={2}>
+            <Typography variant="h4" component='h2' textAlign='center'>
+                {selectedEvent.title}
             </Typography>
             <Typography>
                 {'Guest: ' + selectedEvent.extendedProps.guest.email}
@@ -45,7 +61,19 @@ function EventInfoModal({open, handleClose, selectedEvent}) {
             <Typography>
                 {'Description: ' + selectedEvent.extendedProps.description}
             </Typography>
-            </Box>}
+            <Typography>
+                {'Start time: ' + selectedEvent.start}
+            </Typography>
+            <Typography>
+                {'End time: ' + selectedEvent.end}
+            </Typography>
+            <Stack direction='row' gap={2} alignItems='center'>
+                <Typography>
+                    Do you need to cancel this meeting?
+                </Typography>
+                <StyledButton variant='contained' onClick={handleDeleteEvent}>Cancel</StyledButton>
+            </Stack>
+            </Stack>}
         </StyledBox>
       </Modal>
   )
