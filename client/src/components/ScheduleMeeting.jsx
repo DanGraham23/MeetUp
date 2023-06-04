@@ -13,22 +13,23 @@ import countries from '../data/countries.json';
 
 import { useContext, useState, useEffect } from 'react';
 import { EventContext } from '../context/EventContext';
-import { getFriendsRoute } from '../utils/routes';
+import { addEventRoute, getFriendsRoute } from '../utils/routes';
 import { axiosPrivate } from '../utils/axios';
 
 
 function ScheduleMeeting({handleClose}) {
     const {setEvents} = useContext(EventContext);
-    const [friendOptions, setFriendOptions] = useState([]);
+    const [friendOptions, setFriendOptions] = useState({});
 
     async function fetchFriends(){
         await axiosPrivate.get(getFriendsRoute).then((res) =>{
-          const friends = res.data;
-          if (res.data.length < 1) return;
-          setFriendOptions(friends.map((friend) => ({
-            value:friend.id,
-            label:friend.email
-          })));
+            const friends = res.data;
+            if (res.data.length < 1) return;
+            const newFriendOptions = {};
+            friends.forEach((friend) => {
+                newFriendOptions[friend.id] = friend.email;
+            });
+            setFriendOptions(newFriendOptions);
         }).catch((err) => {
           console.log(err);
         })
@@ -40,18 +41,35 @@ function ScheduleMeeting({handleClose}) {
 
     async function handleSubmit(values){
         handleClose();
+        //This maps the event for the full calendar component to use
+        // const start = values.startDate + "T"+values.startTime+":00";
+        // const end = values.startDate + "T"+values.endTime+":00";
+        // const event = {
+        //     id: 10,
+        //     title: values.title,
+        //     start,
+        //     end,
+        //     extendedProps: {
+        //         location: "Online",
+        //         description: values.description
+        //     }
+        // }
+        //This maps the event to be used by the backend API
         const start = values.startDate + "T"+values.startTime+":00";
         const end = values.startDate + "T"+values.endTime+":00";
-        const event = {
-            id: 10,
+        await axiosPrivate.post(addEventRoute, {
             title: values.title,
-            start,
-            end,
-            extendedProps: {
-                location: "Online",
-                description: values.description
-            }
-        }
+            startDate: start,
+            endDate: end,
+            description: values.description,
+            guest_id: values.friend
+        }).then((res) => {
+            console.log("event added");
+        }).catch((err) => {
+            console.log(err);
+        })
+
+        console.log(values);
         setEvents((prevEvents) => [...prevEvents, event]);
     }
 
@@ -74,7 +92,7 @@ function ScheduleMeeting({handleClose}) {
                     <FormSelect 
                         name='friend'
                         label='Pick a friend'
-                        options={countries}
+                        options={friendOptions}
                         />
                 </Grid>
                 <Grid item xs={12}>

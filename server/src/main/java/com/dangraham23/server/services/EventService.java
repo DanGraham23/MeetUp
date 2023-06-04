@@ -27,6 +27,7 @@ public class EventService {
     UserRepository userRepository;
 
     public boolean addEvent(AddEventRequest eventRequest){
+        System.out.println(eventRequest);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
@@ -36,9 +37,7 @@ public class EventService {
                 Optional<User> foundUser = userRepository.findByEmail(userEmail);
                 if (foundUser.isPresent()){
                     var user = foundUser.get();
-                    if (user.getId() != eventRequest.getHost_id() || eventRequest.getHost_id() == eventRequest.getGuest_id()) return false;
-                        User host = userRepository.findById(eventRequest.getHost_id())
-                        .orElseThrow(() -> new IllegalArgumentException("Invalid host user ID"));
+                    if (user.getId() == eventRequest.getGuest_id()) return false;
                         User guest = userRepository.findById(eventRequest.getGuest_id())
                         .orElseThrow(() -> new IllegalArgumentException("Invalid guest user ID"));
                         Event event = Event.builder()
@@ -46,10 +45,9 @@ public class EventService {
                         .startDate(eventRequest.getStartDate())
                         .endDate(eventRequest.getEndDate())
                         .description(eventRequest.getDescription())
-                        .host(host)
+                        .host(user)
                         .guest(guest)
                         .build();
-                        System.out.println("*****" + event.toString());
                     eventRepository.save(event);
                     return true;
                 }

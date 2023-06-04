@@ -16,6 +16,5 @@ public class AddEventRequest {
     private Date startDate;
     private Date endDate;
     private String description;
-    private Integer host_id;
     private Integer guest_id;
 }
