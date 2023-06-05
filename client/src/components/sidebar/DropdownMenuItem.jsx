@@ -1,6 +1,21 @@
-import { Box, Button, Typography, Divider } from '@mui/material';
+import { Box, Button, Typography, Divider, MenuItem, ListItemText, styled } from '@mui/material';
 import { axiosPrivate } from '../../utils/axios';
 import { addFriendRoute } from '../../utils/routes';
+
+const StyledBox = styled(Box)(({theme}) => ({
+  padding: '8px 16px',
+  minHeight: '48px',
+  whiteSpace: 'nowrap',
+  fontWeight: '400',
+  lineHeight: '1.5',
+  color: theme.palette.text.primary,
+  overflowX: 'hidden',
+  textOverflow: 'ellipsis',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+  gap:'10px',
+}));
 
 function DropdownMenuItem({id, email}) {
 
@@ -14,13 +29,15 @@ function DropdownMenuItem({id, email}) {
 
   return (
     <>
-    <Box 
-    sx={{width:'100%', backgroundColor:'white', height:'50px', display:'flex', alignItems:'center', justifyContent:'center',gap:'10px'}}>
-        <Typography>
+    <StyledBox>
+        <ListItemText>
             {email}
-        </Typography>
-        <Button variant='contained' onClick={addFriend}>Add</Button>
-    </Box>
+        </ListItemText>
+        <Button 
+        variant='contained' 
+        onClick={addFriend} 
+        sx={{maxWidth: '40px', maxHeight: '30px', minWidth: '40px', minHeight: '30px', fontSize:'14px'}}>Add</Button>
+    </StyledBox>
     <Divider />
     </>
   );
