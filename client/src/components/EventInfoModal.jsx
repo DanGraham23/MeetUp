@@ -1,4 +1,4 @@
-import { Box, Typography, Modal, styled, IconButton, Stack, Button  } from '@mui/material';
+import { Box, Typography, Modal, styled, IconButton, Stack, Button, Container, Divider  } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { axiosPrivate } from '../utils/axios';
 import { deleteEventRoute } from '../utils/routes';
@@ -8,7 +8,7 @@ const StyledBox = styled(Box)(({theme})=> ({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '60%',
+  width: '40%',
   height: '600px',
   display:'flex',
   flexDirection:'column',
@@ -38,6 +38,7 @@ function EventInfoModal({open, handleClose, selectedEvent}) {
                 console.log(err);
             });
         }
+        window.location.reload(false);
     }
 
   return (
@@ -51,22 +52,29 @@ function EventInfoModal({open, handleClose, selectedEvent}) {
           <IconButton size='medium' onClick={handleClose} sx={{marginLeft:'auto', marginRight:'10%'}}>
             <CloseIcon fontSize='medium'/>
           </IconButton>
-        {selectedEvent && <Stack gap={2}>
+        {selectedEvent && <Stack gap={2} marginLeft='30px' marginRight='30px'>
             <Typography variant="h4" component='h2' textAlign='center'>
                 {selectedEvent.title}
+            </Typography>
+            <Divider />
+            <Typography>
+                {'Host: ' + selectedEvent.extendedProps.host.email}
             </Typography>
             <Typography>
                 {'Guest: ' + selectedEvent.extendedProps.guest.email}
             </Typography>
+            <Divider />
             <Typography>
-                {'Description: ' + selectedEvent.extendedProps.description}
+                {selectedEvent.extendedProps.description}
             </Typography>
+            <Divider />
             <Typography>
                 {'Start time: ' + selectedEvent.start}
             </Typography>
             <Typography>
                 {'End time: ' + selectedEvent.end}
             </Typography>
+            <Divider />
             <Stack direction='row' gap={2} alignItems='center'>
                 <Typography>
                     Do you need to cancel this meeting?

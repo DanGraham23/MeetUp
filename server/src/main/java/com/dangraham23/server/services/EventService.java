@@ -67,7 +67,7 @@ public class EventService {
                 if (foundUser.isPresent()){
                     var user = foundUser.get();
                     var userId = user.getId();
-                    Optional<List<Event>> foundEvents = eventRepository.findAllByHostId(userId);
+                    Optional<List<Event>> foundEvents = eventRepository.findAllByHostIdOrGuestId(userId,userId);
                     if (foundEvents.isPresent()){
                         List<Event> events =  foundEvents.get();
                         List<GetEventsResponse> responseEvents = new ArrayList<>();
@@ -105,7 +105,7 @@ public class EventService {
                 if (foundUser.isPresent() && foundEvent.isPresent()){
                     var user = foundUser.get();
                     var event = foundEvent.get();
-                    if (user.getId() != event.getHost().getId()) return false;
+                    if (user.getId() != event.getHost().getId() && user.getId() != event.getGuest().getId()) return false;
                     eventRepository.deleteById(id);
                     return true;
                 }

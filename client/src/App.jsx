@@ -7,7 +7,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import { useThemeContext } from './theme/ThemeContext';
 import {CssBaseline, ThemeProvider} from '@mui/material';
-import { UserContext } from './context/UserContext';
 
 import Calendar from './pages/Calendar';
 import Friends from './pages/Friends';
@@ -16,25 +15,35 @@ import HelpCenter from './pages/HelpCenter';
 
 import { axiosPrivate } from './utils/axios';
 import { getUserRoute } from './utils/routes';
+import { AuthContext } from './context/AuthContext';
 
 function App() {
-  const {setUser} = useContext(UserContext);
+  const {auth, setAuth} = useContext(AuthContext);
+
   const {theme} = useThemeContext();
   
   async function fetchUser(){
     await axiosPrivate.get(getUserRoute).then((res) => {
-        setUser(res.data);
+        setAuth({
+          id: res.data.id,
+          firstName: res.data.firstName,
+          lastName: res.data.lastName,
+          isLoggedIn:true
+        })
     }).catch((err) => {
         console.log(err);
     });
   }
 
   useEffect(() => {
-    fetchUser();
+    if (!auth.isLoggedIn){
+      fetchUser();
+    }
   }, [])
 
   return (
     <ThemeProvider theme={theme}>
+      {console.log("app ran")}
       <BrowserRouter>
         <Box>
           <Routes>

@@ -2,12 +2,14 @@ import {
     Box, 
     styled, 
     InputBase
-
 } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
 
 import {axiosPrivate} from '../../utils/axios';
+import { searchUsersRoute} from '../../utils/routes';
+import { useState, useEffect } from 'react';
+import DropdownMenu from './DropdownMenu';
 
 const StyledSearch = styled(Box)(({ theme }) => ({
     position: 'relative',
@@ -43,6 +45,31 @@ const StyledSearch = styled(Box)(({ theme }) => ({
   }));
 
 function Search() {
+
+  const [curSearch, setCurSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  async function fetchUsers(){
+    await axiosPrivate(`${searchUsersRoute}/${curSearch}`).then((res) => {
+      setSearchResults(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
+  //This needs a debounce hook, works for now
+  useEffect(() => {
+    if (curSearch !== ''){
+      fetchUsers();
+    }else{
+      setSearchResults([]);
+    }
+  }, [curSearch])
+
+  function handleChange(e){
+    setCurSearch(e.target.value);
+  };
+
   return (
     <StyledSearch>
         <SearchIconWrapper>
@@ -51,7 +78,10 @@ function Search() {
         <StyledInputBase
         placeholder="Search by email..."
         inputProps={{ 'aria-label': 'search' }}
+        value={curSearch}
+        onChange={handleChange}
         />
+        {searchResults.length > 0 && <DropdownMenu searchResults={searchResults} />}
     </StyledSearch>
   )
 }

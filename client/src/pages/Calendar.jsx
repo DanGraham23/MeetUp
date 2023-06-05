@@ -20,6 +20,7 @@ function Calendar() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const StyledFullCalendarWrapper = styled('div')(({theme}) => ({
     '--fc-border-color': theme.palette.text.primary,
@@ -58,21 +59,30 @@ function Calendar() {
               extendedProps: {
                   location: 'Online',
                   description: newEvent.description,
+                  guest: {
+                    id: newEvent.guest_id,
+                    email: newEvent.guest_email
+                  },
+                  host: {
+                    id: newEvent.host_id,
+                    email: newEvent.host_email
+                  }
                 },
-              guest: {
-                  id: newEvent.guest_id,
-                  email: newEvent.guest_email
-                }
               }
-          })
-          setEvents((prevEvents) => [...prevEvents, ...newEvents])
+          });
+          setEvents(newEvents);
+          setLoading(false);
       }).catch((err) => {
           console.log(err);
       });
   }
 
   useEffect(() => {
-    fetchEvents();
+    if (events === null || events.length === 0){
+      fetchEvents();
+    }else{
+      setLoading(false);
+    }
   }, []);
 
     function handleEventClick(info){
@@ -82,7 +92,7 @@ function Calendar() {
 
   return (
     <DashboardView>
-      <StyledFullCalendarWrapper>
+      {loading ? <div>Loading...</div> : <><StyledFullCalendarWrapper>
         <FullCalendar 
         themeSystem='slate'
         eventClick={handleEventClick}
@@ -90,7 +100,7 @@ function Calendar() {
         {...configFullCalendar}  
         />
       </StyledFullCalendarWrapper>   
-      <EventInfoModal open={open} handleClose={handleClose} selectedEvent={selectedEvent}/>
+      <EventInfoModal open={open} handleClose={handleClose} selectedEvent={selectedEvent}/></>}
     </DashboardView>
   )
 }

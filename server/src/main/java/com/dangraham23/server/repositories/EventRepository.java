@@ -10,6 +10,6 @@ import com.dangraham23.server.entities.Event;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
-    Optional<List<Event>> findAllByHostId(Integer id);
+    Optional<List<Event>> findAllByHostIdOrGuestId(Integer hostId, Integer guestId);
 
 }

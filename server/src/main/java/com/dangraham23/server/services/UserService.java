@@ -166,31 +166,31 @@ public class UserService {
     }
 
     public List<GetFriendResponse> searchUsers(String email){
-        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // if (authentication.isAuthenticated()) {
-        //     Object principal = authentication.getPrincipal();
-        //     if (principal instanceof UserDetails) {
-        //         UserDetails userDetails = (UserDetails) principal;
-        //         var userEmail = userDetails.getUsername();
-        //         Optional<User> foundUser = userRepository.findByEmail(userEmail);
-        //         if (foundUser.isPresent()){
-        //             var user = foundUser.get();
-        //             List<User> nonFriendUsers = userRepository.findByEmailContainingAndNotFriends(email, user.getId());
-        //             List<GetFriendResponse> friends = new ArrayList<>();
-        //             for (User friend : nonFriendUsers) {
-        //                 var friendResponse = GetFriendResponse.builder()
-        //                         .email(friend.getEmail())
-        //                         .phoneNumber(friend.getPhoneNumber())
-        //                         .firstName(friend.getFirstName())
-        //                         .lastName(friend.getLastName())
-        //                         .id(friend.getId())
-        //                         .build();
-        //                 friends.add(friendResponse);
-        //             }
-        //             return friends;
-        //         }
-        //     }
-        // }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) principal;
+                var userEmail = userDetails.getUsername();
+                Optional<User> foundUser = userRepository.findByEmail(userEmail);
+                if (foundUser.isPresent()){
+                    var user = foundUser.get();
+                    List<User> nonFriendUsers = userRepository.findMatchingUsers(user.getId(), email);
+                    List<GetFriendResponse> nonFriends = new ArrayList<>();
+                    for (User nonFriend : nonFriendUsers) {
+                        var friendResponse = GetFriendResponse.builder()
+                                .email(nonFriend.getEmail())
+                                .phoneNumber(nonFriend.getPhoneNumber())
+                                .firstName(nonFriend.getFirstName())
+                                .lastName(nonFriend.getLastName())
+                                .id(nonFriend.getId())
+                                .build();
+                            nonFriends.add(friendResponse);
+                    }
+                    return nonFriends;
+                }
+            }
+        }
         return null;
     }
 }

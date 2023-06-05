@@ -11,3 +11,4 @@ export const updateUserRoute = "/user";
 export const getFriendsRoute ="/user/friends"
 export const addFriendRoute = "/user/add-friend";
 export const deleteFriendRoute = "/user/delete-friend";
+export const searchUsersRoute = "/user/search";

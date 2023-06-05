@@ -10,15 +10,14 @@ import FormSelect from './formComponents/FormSelect';
 
 import { INITIAL_FORM_STATE, FORM_VALIDATION } from '../utils/MeetingForm';
 
-import { useContext, useState, useEffect } from 'react';
-import { EventContext } from '../context/EventContext';
+import { useState, useEffect } from 'react';
 import { addEventRoute, getFriendsRoute } from '../utils/routes';
 import { axiosPrivate } from '../utils/axios';
 
 
 function ScheduleMeeting({handleClose}) {
-    const {setEvents} = useContext(EventContext);
     const [friendOptions, setFriendOptions] = useState({});
+    const [loading, setLoading] = useState(true);
 
     async function fetchFriends(){
         await axiosPrivate.get(getFriendsRoute).then((res) =>{
@@ -32,6 +31,7 @@ function ScheduleMeeting({handleClose}) {
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
       }
 
       useEffect(() => {
@@ -40,7 +40,6 @@ function ScheduleMeeting({handleClose}) {
 
     async function handleSubmit(values){
         handleClose();
-        //This maps the event to be used by the backend API
         const start = values.startDate + "T"+values.startTime+":00";
         const end = values.startDate + "T"+values.endTime+":00";
         await axiosPrivate.post(addEventRoute, {
@@ -53,21 +52,13 @@ function ScheduleMeeting({handleClose}) {
             console.log("event added");
         }).catch((err) => {
             console.log(err);
-        })
-
-        console.log({
-            title: values.title,
-            startDate: start,
-            endDate: end,
-            description: values.description,
-            guest_id: values.friend
         });
-        setEvents((prevEvents) => [...prevEvents, event]);
+        window.location.reload(false);
     }
 
   return (
     <Box sx={{height:'400px', width:'80%', marginLeft:'auto', marginRight:'auto'}}>
-        <Formik
+        {loading ? <div>Loading...</div> :  <Formik
         initialValues={INITIAL_FORM_STATE}
         validationSchema={FORM_VALIDATION}
         onSubmit={handleSubmit}
@@ -132,7 +123,7 @@ function ScheduleMeeting({handleClose}) {
                 </Grid>
                 </Grid>
             </Form>
-        </Formik>
+        </Formik>}
     </Box>
   )
 }

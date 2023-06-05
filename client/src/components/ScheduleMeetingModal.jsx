@@ -19,6 +19,7 @@ const StyledBox = styled(Box)(({theme})=> ({
 }));
 
 function ScheduleMeetingModal({open, handleClose}) {
+
   return (
     <Modal
         open={open}

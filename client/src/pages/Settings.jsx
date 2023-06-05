@@ -10,14 +10,24 @@ import { FORM_VALIDATION } from "../utils/SettingsForm";
 
 import countries from '../data/countries.json';
 
-import { useContext } from "react";
-import { UserContext } from "../context/UserContext";
-import { convertPhoneNumber } from "../common/convert";
 import { axiosPrivate } from "../utils/axios";
-import { updateUserRoute } from "../utils/routes";
+import { getUserRoute, updateUserRoute } from "../utils/routes";
+import { useEffect, useState } from "react";
 
 function Settings() {
-    const {user} = useContext(UserContext);
+    const [userDetails, setUserDetails] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        phone: '',
+        address: '',
+        city: '',
+        state: '',
+        country: '',
+      });
+
+      const [loading, setLoading] = useState(true);
 
     async function handleSubmit(values){
         await axiosPrivate.put(updateUserRoute, {
@@ -37,24 +47,49 @@ function Settings() {
         });
     }
 
-    const INITIAL_FORM_STATE = {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        password: '',
-        phone: user.phoneNumber,
-        address: user.address,
-        city: user.city,
-        state: user.state,
-        country: user.country,
-    }; 
+    async function fetchUser(){
+        await axiosPrivate.get(getUserRoute).then((res) => {
+            setUserDetails((prev) => ({
+                ...prev,
+                firstName: res.data.firstName,
+                lastName: res.data.lastName,
+                email: res.data.email,
+                phone: res.data.phoneNumber,
+                address: res.data.address,
+                city: res.data.city,
+                state: res.data.state,
+                country: res.data.country,
+              }));
+              setLoading(false);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    useEffect(() => {
+        if (userDetails.email === ''){
+            fetchUser();
+        }
+    },[]) 
+
+    const INITIAL_FORM_VALUES = {
+        firstName: userDetails.firstName,
+        lastName: userDetails.lastName,
+        email: userDetails.email,
+        phone: userDetails.phone,
+        address: userDetails.address,
+        city: userDetails.city,
+        state: userDetails.state,
+        country: userDetails.country,
+    }
+
 
   return (
     <DashboardView>
-        <Box>
+        {loading ? <div>Loading...</div> : <Box>
         <Formik
         validationSchema={FORM_VALIDATION}
-        initialValues={INITIAL_FORM_STATE}
+        initialValues={INITIAL_FORM_VALUES}
         onSubmit={handleSubmit}
         >
             <Form>
@@ -144,7 +179,7 @@ function Settings() {
                 </Grid>
             </Form>
         </Formik>
-    </Box>
+    </Box>}
     </DashboardView>
   )
 }
