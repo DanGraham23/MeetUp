@@ -1,43 +1,53 @@
 # MeetUp
 
-### This is NOT a complete project. I am actively working on much of the functionality.
-
-MeetUp is an application to schedule meetings with other users.
+## MeetUp is an application to schedule meetings with other users.
 
 ---- Tech Stack ----
 
-Frontend: React, React Context, Material UI, Formik, Yup, FullCalendar
+Frontend: React, React Context, Material UI
+
+- Formik and Yup are used for the form design and validation
+- FullCalendar is used as the main calendar component
 
 Backend: Java Spring Boot, PostgreSQL
 
 
----- Working Features ----
+---- Features ----
 
-- Login and Register forms
-- Dashboard page for each user with functional sidebar component
-- Dark mode/Light mode toggle, persisted in local storage and uses browser preference as default
-- Calendar on dashboard to display user events
-- Modal form to schedule meetings with other users
-- Settings page to view and update user information
-- Friends list displays current friends with option to remove
+Authentication:
+- Users login/register and are authenticated with Spring Security 3
+- Access to secure endpoints is granted with a valid JWT
 
----- Todo ----
+Calendar:
+- A user's calendar displays their current events (host and guest events)
+- Events can be clicked to see more information or to cancel the event
+- There are options to filter by month, week, and day provided by FullCalendar
+- Modal to schedule new meetings and pick a guest from a user's friendslist to add to the meeting
+
+Sidebar:
+- Dark mode toggle switch persisted in local storage and defaults to browser preference
+- Several tabs to navigate between various dashboard features, Friends, Help Center, etc.
+
+Settings:
+- Users can change their current settings by providing a valid current password with their request
 
 Search:
-- Implement endpoint and functionality to find users to add to friends list
+- Search functionality to find users who are not friends in order to add them
+- Displays based on the current email prefix, Ex, "sa" will display "sam @ email . com" and "sarah @ email . com"
 
-General:
-- Add option to upload profile picture (store with S3 bucket)
-- Add landing page
-- API should set JWT in response header, currently needs to be manually put in axios instance after logging in
-- Improve Styling, Responsiveness, and Accessibility
+---- Future Plans ----
 
-Bugs:
-- Events are listen twice when pulled from API
-- Users current settings displays only after a page update
-- Events that the current user is a guest of should be put onto calendar with the host listed on modal instead of guest
-- Friends are currently a one-way feature (X adds Y, X has friend Y, Y has no friend). I might keep this for now and implement friend requests later.
+- Currently the site is working as an MVP, however I plan to redesign and improve the site as I create new features
+- There is no landing page, which I am currently designing
+- Profile pictures are the default MUI ones, which I plan to change by integrating with AWS S3 for file uploads
+- As I test the site I will improve error handling with some of the API endpoints when users enter invalid information
 
-This is a current image of the main dashboard component. The design will change significantly as I add functionality: 
+These are some current images of the site. I will likely create a demo or host the site after working out some of the bugs.
+![image](https://github.com/DanGraham23/MeetUp/assets/59900510/f8f8074f-d167-496d-985b-9c537f1b3bd4)
+![image](https://github.com/DanGraham23/MeetUp/assets/59900510/7192e526-c83b-423c-b90e-7aed737a40b9)
+![image](https://github.com/DanGraham23/MeetUp/assets/59900510/e81d496e-9d72-4bf2-8312-120008cf7505)
+![image](https://github.com/DanGraham23/MeetUp/assets/59900510/9f5e9398-f8f7-40b8-af40-ab872f15c12e)
+![image](https://github.com/DanGraham23/MeetUp/assets/59900510/1b0cceaa-2e4d-4723-b20d-45d93bc5a390)
 
-![MeetUp](https://github.com/DanGraham23/MeetUp/assets/59900510/434d6a22-9c6b-488d-b86e-841aa004b735)
+
+
