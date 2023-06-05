@@ -8,7 +8,7 @@ const StyledBox = styled(Box)(({theme})=> ({
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '60%',
-  height: '600px',
+  height: '650px',
   display:'flex',
   flexDirection:'column',
   alignItems:'center',
@@ -34,7 +34,7 @@ function ScheduleMeetingModal({open, handleClose}) {
           <Typography variant="h6" component="h2">
             Schedule a meeting
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography id="modal-modal-description" sx={{ mt: 2, marginBottom:'10px' }}>
             Fill out this form to let me know about this meeting
           </Typography>
           <ScheduleMeeting handleClose={handleClose}/>

@@ -38,7 +38,6 @@ function DropdownMenuItem({id, email}) {
         onClick={addFriend} 
         sx={{maxWidth: '40px', maxHeight: '30px', minWidth: '40px', minHeight: '30px', fontSize:'14px'}}>Add</Button>
     </StyledBox>
-    <Divider />
     </>
   );
 }
