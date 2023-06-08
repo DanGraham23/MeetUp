@@ -71,17 +71,16 @@ function Calendar() {
               }
           });
           setEvents(newEvents);
-          setLoading(false);
       }).catch((err) => {
           console.log(err);
+      }).finally(() => {
+        setLoading(false);
       });
   }
 
   useEffect(() => {
     if (events === null || events.length === 0){
       fetchEvents();
-    }else{
-      setLoading(false);
     }
   }, []);
 

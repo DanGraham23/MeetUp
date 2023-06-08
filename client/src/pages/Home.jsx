@@ -1,16 +1,9 @@
 import {Container, Link, Typography} from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
 
 function Home() {
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (localStorage.getItem("meetup-user")!== null){
-        navigate('/dashboard/calendar');
-    }
-    }, []);
 
   return (
     <Container >
@@ -24,9 +17,9 @@ function Home() {
           Click here to login
         </Typography>
       </Link>
-      <Link href='/dashboard'>
+      <Link href='/dashboard/calendar'>
         <Typography>
-          Click here to checkout a profile (must login to see actual data)
+          Click here to checkout your profile (must be logged in with valid JWT, if you cannot seem to access data, try logging in again!)
         </Typography>
       </Link>
     </Container>

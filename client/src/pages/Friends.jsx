@@ -13,9 +13,10 @@ function Friends() {
   async function fetchFriends(){
     await axiosPrivate.get(getFriendsRoute).then((res) =>{
       setFriends(res.data);
-      setLoading(false);
     }).catch((err) => {
       console.log(err);
+    }).finally(() => {
+      setLoading(false);
     });
   }
 

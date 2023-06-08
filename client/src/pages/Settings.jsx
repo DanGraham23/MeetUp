@@ -60,10 +60,11 @@ function Settings() {
                 state: res.data.state,
                 country: res.data.country,
               }));
-              setLoading(false);
         }).catch((err) => {
             console.log(err);
-        });
+        }).finally(() => {
+            setLoading(false);
+          });
     }
 
     useEffect(() => {

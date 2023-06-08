@@ -17,6 +17,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import ScheduleMeetingModal from '../ScheduleMeetingModal';
 import Search from './Search';
@@ -88,6 +89,14 @@ function Sidebar() {
                 <SettingsIcon/>
               </ListItemIcon>
               <ListItemText primary="Settings" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton  onClick={() => {localStorage.removeItem('meetup-user'); navigate("/")}}>
+              <ListItemIcon>
+                <LogoutIcon/>
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>

@@ -30,8 +30,9 @@ function ScheduleMeeting({handleClose}) {
             setFriendOptions(newFriendOptions);
         }).catch((err) => {
           console.log(err);
-        })
-        setLoading(false);
+        }).finally(() => {
+            setLoading(false);
+          });
       }
 
       useEffect(() => {

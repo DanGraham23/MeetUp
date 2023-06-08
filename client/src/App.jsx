@@ -36,9 +36,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (!auth.isLoggedIn){
-      fetchUser();
-    }
+    fetchUser();
   }, [])
 
   return (

@@ -1,5 +1,5 @@
 import {Formik, Form} from 'formik';
-import {Box, Typography, Grid} from '@mui/material';
+import {Box, Typography, Grid, Link} from '@mui/material';
 
 import FormTextField from '../components/formComponents/FormTextField';
 import FormSubmitButton from '../components/formComponents/FormSubmitButton';
@@ -81,6 +81,7 @@ function Login() {
                 </Grid>
             </Form>
         </Formik>
+        <Link href='/register'>New member? Click here to register instead!</Link>
     </Box>
   )
 }

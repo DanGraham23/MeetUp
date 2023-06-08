@@ -1,6 +1,6 @@
 import {Formik, Form} from 'formik';
 import {INITIAL_FORM_STATE, FORM_VALIDATION} from '../utils/RegisterForm';
-import {Box, Typography, Grid} from '@mui/material';
+import {Box, Typography, Grid, Link} from '@mui/material';
 
 import FormTextField from '../components/formComponents/FormTextField';
 import FormSelect from '../components/formComponents/FormSelect';
@@ -154,6 +154,7 @@ function Register() {
                 </Grid>
             </Form>
         </Formik>
+        <Link href='/login'>Already a member? Click here to login instead!</Link>
     </Box>
   )
 }
