@@ -8,7 +8,9 @@
     "build": "vite build",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint:check": "eslint .",
+    "lint:write": "eslint --fix .",
+    "formatAndLint": "prettier --write . && eslint --fix .",
     "preview": "vite preview"
   },
   "dependencies": {

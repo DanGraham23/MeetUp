@@ -1,3 +1,6 @@
 .prettierrc.yml
 .prettierignore
 
+src/theme
+src/utils
+src/datas
