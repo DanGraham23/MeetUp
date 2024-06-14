@@ -1,31 +1,25 @@
-import { TextField } from "@mui/material";
-import { useField } from "formik";
+import { TextField } from '@mui/material';
+import { useField } from 'formik';
 
-function FormDatePicker({name, ...otherProps}) {
+function FormDatePicker({ name, ...otherProps }) {
+  const [field, meta] = useField(name);
 
-    const [field, meta] = useField(name);
+  const configFormDatePicker = {
+    ...field,
+    ...otherProps,
+    type: 'date',
+    fullWidth: true,
+    InputLabelProps: {
+      shrink: true,
+    },
+  };
 
-    const configFormDatePicker = {
-        ...field,
-        ...otherProps,
-        type: 'date',
-        fullWidth: true,
-        InputLabelProps: {
-            shrink:true,
-        },
-    }
+  if (meta && meta.touched && meta.error) {
+    configFormDatePicker.error = true;
+    configFormDatePicker.helperText = meta.error;
+  }
 
-    if (meta && meta.touched && meta.error){
-      configFormDatePicker.error = true;
-      configFormDatePicker.helperText = meta.error;
-    }
-
-  return (
-    <TextField
-     {...configFormDatePicker}
-     >
-    </TextField>
-  )
+  return <TextField {...configFormDatePicker}></TextField>;
 }
 
 export default FormDatePicker;

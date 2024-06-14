@@ -1,28 +1,21 @@
-import { Button } from "@mui/material";
-import {useFormikContext} from 'formik';
+import { Button } from '@mui/material';
+import { useFormikContext } from 'formik';
 
-function FormSubmitButton({children, ...otherProps}) {
+function FormSubmitButton({ children, ...otherProps }) {
+  const { submitForm } = useFormikContext();
 
-    const {submitForm} = useFormikContext();
+  function handleSubmit() {
+    submitForm();
+  }
 
-    function handleSubmit(){
-        submitForm();
-    }
+  const configFormSubmitButton = {
+    ...otherProps,
+    variant: 'contained',
+    fullWidth: true,
+    onClick: handleSubmit,
+  };
 
-    const configFormSubmitButton = {
-        ...otherProps,
-        variant:'contained',
-        fullWidth:true,
-        onClick:handleSubmit,
-    }
-
-  return (
-    <Button 
-    {...configFormSubmitButton}
-    >
-        {children}
-    </Button>
-  )
+  return <Button {...configFormSubmitButton}>{children}</Button>;
 }
 
 export default FormSubmitButton;

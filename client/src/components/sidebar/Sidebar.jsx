@@ -1,15 +1,16 @@
 import {
-    Box, 
-    styled, 
-    List, ListItem, 
-    ListItemButton, 
-    ListItemIcon, 
-    ListItemText, 
-    Divider,
+  Box,
+  styled,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
 } from '@mui/material';
 
 import { useState } from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PeopleIcon from '@mui/icons-material/People';
@@ -23,10 +24,10 @@ import ScheduleMeetingModal from '../ScheduleMeetingModal';
 import Search from './Search';
 import DarkModeSwitch from './DarkModeSwitch';
 
-const StyledBox = styled(Box)(({theme}) => ({
-    flex: 2,
-    padding: 20,
-    height: '100vh',
+const StyledBox = styled(Box)(({ theme }) => ({
+  flex: 2,
+  padding: 20,
+  height: '100vh',
 }));
 
 function Sidebar() {
@@ -39,29 +40,29 @@ function Sidebar() {
     <StyledBox>
       <nav aria-label="main mailbox folders">
         <List>
-          <ListItem disablePadding sx={{padding:'8px 16px 8px 16px'}}>
+          <ListItem disablePadding sx={{ padding: '8px 16px 8px 16px' }}>
             <Search />
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton onClick={handleOpen}>
               <ListItemIcon>
-                <EditCalendarOutlinedIcon/>
+                <EditCalendarOutlinedIcon />
               </ListItemIcon>
               <ListItemText primary="Schedule New Meeting" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate("/dashboard/friends")}>
+            <ListItemButton onClick={() => navigate('/dashboard/friends')}>
               <ListItemIcon>
-                <PeopleIcon/>
+                <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="Friends" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate("/dashboard/calendar")}>
+            <ListItemButton onClick={() => navigate('/dashboard/calendar')}>
               <ListItemIcon>
-                <CalendarMonthIcon/>
+                <CalendarMonthIcon />
               </ListItemIcon>
               <ListItemText primary="Calendar" />
             </ListItemButton>
@@ -71,9 +72,9 @@ function Sidebar() {
       <Divider />
       <nav aria-label="secondary mailbox folders">
         <List>
-          <ListItem disablePadding sx={{padding:'8px 16px 8px 16px'}}>
-          <ListItemIcon>
-              <DarkModeIcon/>
+          <ListItem disablePadding sx={{ padding: '8px 16px 8px 16px' }}>
+            <ListItemIcon>
+              <DarkModeIcon />
             </ListItemIcon>
             <ListItemText primary="Dark mode" />
             <DarkModeSwitch />
@@ -84,34 +85,39 @@ function Sidebar() {
       <nav aria-label="tertiary mailbox folders">
         <List>
           <ListItem disablePadding>
-            <ListItemButton  onClick={() => navigate("/dashboard/settings")}>
+            <ListItemButton onClick={() => navigate('/dashboard/settings')}>
               <ListItemIcon>
-                <SettingsIcon/>
+                <SettingsIcon />
               </ListItemIcon>
               <ListItemText primary="Settings" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton  onClick={() => {localStorage.removeItem('meetup-user'); navigate("/")}}>
+            <ListItemButton
+              onClick={() => {
+                localStorage.removeItem('meetup-user');
+                navigate('/');
+              }}
+            >
               <ListItemIcon>
-                <LogoutIcon/>
+                <LogoutIcon />
               </ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate("/dashboard/help")}>
+            <ListItemButton onClick={() => navigate('/dashboard/help')}>
               <ListItemIcon>
-                <HelpCenterIcon/>
+                <HelpCenterIcon />
               </ListItemIcon>
               <ListItemText primary="Help Center" />
             </ListItemButton>
           </ListItem>
         </List>
       </nav>
-      <ScheduleMeetingModal open={open} handleClose={handleClose}/>
+      <ScheduleMeetingModal open={open} handleClose={handleClose} />
     </StyledBox>
-  )
+  );
 }
 
 export default Sidebar;
